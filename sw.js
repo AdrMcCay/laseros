@@ -1,5 +1,5 @@
 // LaserOS service worker: keeps the app and everything it needs on the device, so it opens offline.
-const CACHE = "laseros-20261120-144629";
+const CACHE = "laseros-20261120-172624";
 const CORE = [
   "./", "./index.html", "./manifest.webmanifest",
   "./icons/apple-touch-icon.png", "./icons/icon-192.png", "./icons/icon-512.png", "./icons/icon-maskable-512.png", "./icons/favicon-64.png",

@@ -19,6 +19,6 @@ Upload the new files over the old ones. Each build has a new `sw.js`, so phones 
 
 ## Notes
 
-- Saved files (PNG, MP4, CSV, settings JSON, reports) open the iPhone share sheet: choose *Save to Files*, *Save Video* or AirDrop.
-- Two fingers pinch-zoom the 3D trajectories and the detector plot.
-- Each app has its own link, e.g. `…/laseros/#focal` or `#bcal`.
+- Saved files (PNG, PDF, MP4, CSV, spectra, zip, settings JSON, reports) open the iPhone share sheet: choose *Save to Files*, *Save Video* or AirDrop.
+- Two fingers pinch-zoom the 3D trajectories, the detector plot and the image-plate scan.
+- Each app has its own link, e.g. `…/laseros/#focal`, `#bcal` or `#tpa`.

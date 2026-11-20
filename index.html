@@ -300,6 +300,55 @@ pre.calc { margin: 0; background: var(--tile); border: 1px solid var(--border); 
   .summary.cols-3 { grid-template-columns: 1fr; }
 }
 
+/* TP Spectrum Analyser / Viewer */
+.ta-rows { display: grid; grid-template-columns: minmax(0, 1fr) 200px 30px; gap: 8px 10px; align-items: center; }
+.ta-rows.two { grid-template-columns: minmax(0, 1fr) 150px; }
+.ta-rows > label { font-size: 12px; }
+.ta-ctl { display: flex; gap: 4px; align-items: center; min-width: 0; }
+.ta-ctl .inp { flex: 1; min-width: 0; }
+.inp.wu input { padding-right: 52px; }
+.mini { width: 30px; height: 30px; flex: none; border: 1px solid var(--border); background: var(--tile); color: var(--accent); border-radius: 6px;
+  font: 600 15px var(--font-mono); cursor: pointer; padding: 0; display: grid; place-items: center; touch-action: manipulation; }
+.mini:hover { border-color: var(--accent); }
+.mini:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.mini[aria-pressed="true"] { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+.field-col { display: flex; flex-direction: column; gap: 5px; }
+.field-col label { font-size: 12px; }
+.tbl-grid { display: grid; gap: 6px; align-items: center; }
+.ta-sp { grid-template-columns: 46px 46px minmax(0, 1fr) minmax(0, 1fr) 22px 88px 24px; }
+.ta-fl { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.7fr) 24px; }
+.tbl-grid .hd { font-size: 10px; font-weight: 700; color: var(--sub); letter-spacing: .6px; text-transform: uppercase; }
+.tbl-grid input[type="text"], .tbl-grid select { padding: 4px 6px; font-size: 12px; min-height: 28px; }
+.tbl-grid .colour select { padding-left: 22px; }
+.tbl-grid input.sel { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+.tbl-grid .chk { justify-content: center; }
+.panel[hidden] { display: none !important; }
+#view-tpa .sec { flex-wrap: wrap; row-gap: 8px; }
+#view-tpa .seg button { white-space: nowrap; }
+.plot-wrap.tall { height: min(76vh, 880px); min-height: 460px; }
+.plot-wrap canvas.pick { cursor: crosshair; }
+.plot-wrap canvas.grabbing { cursor: grabbing; }
+.plot-wrap canvas.ew { cursor: ew-resize; }
+#ta-img { cursor: grab; touch-action: none; }
+#ta-img.pick { cursor: crosshair; }
+#ta-img.grabbing { cursor: grabbing; }
+#sv-plot { touch-action: pan-y; }
+.readout { margin: 0; min-height: 1.5em; font: 500 11.5px var(--font-mono); color: var(--sub); white-space: pre; overflow: hidden; text-overflow: ellipsis; }
+.ion-ctl { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px 10px; align-items: end; }
+.ion-ctl label { display: block; font-size: 11px; font-weight: 600; margin-bottom: 4px; }
+td.fname { font-family: var(--font-mono); font-size: 11.5px; white-space: normal; word-break: break-all; }
+#ta-results tbody tr { cursor: default; }
+.summary.cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.summary.cols-5 .stat .v { font-size: 17px; }
+#sv-warn { align-self: flex-start; white-space: normal; border-radius: 10px; padding: 6px 12px; margin: 0; }
+@media (max-width: 1200px) { .summary.cols-5 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 520px) {
+  .summary.cols-5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ta-rows { grid-template-columns: minmax(0, 1fr) 184px 30px; gap: 8px; }
+  .ta-sp { grid-template-columns: 40px 40px minmax(0, 1fr) minmax(0, 1fr) 20px 64px 22px; gap: 4px; }
+  .plot-wrap.tall { height: 480px; min-height: 0; }
+}
+
 /* Phones: notch / home-bar safe areas, and no Safari zoom when a text box is tapped */
 .os-bar { padding-top: calc(10px + env(safe-area-inset-top)); padding-left: calc(20px + env(safe-area-inset-left)); padding-right: calc(20px + env(safe-area-inset-right)); }
 .os-foot { padding-bottom: calc(24px + env(safe-area-inset-bottom)); }
@@ -333,6 +382,8 @@ html { -webkit-text-size-adjust: 100%; }
         <a class="app-tile" href="#tp"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 4c0 8 5 14 16 16"/><path d="M4 4c1 5 3.5 9 8.5 11"/><circle cx="4" cy="4" r="1.6" fill="currentColor" stroke="none"/></svg></span><span class="t">Thomson Parabola Simulator</span><span class="d">Track ions through the magnet and E-plates and see the traces, hits and energy resolution on the detector.</span></a>
         <a class="app-tile" href="#bcal"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 3v8a7 7 0 0 0 14 0V3h-4.5v8a2.5 2.5 0 0 1-5 0V3z"/><path d="M5 7h4.5M14.5 7H19"/></svg></span><span class="t">TP B-field Calibration</span><span class="d">Fit the magnetic field from measured energy–deflection pairs, small-angle, exact arc and particle push.</span></a>
         <a class="app-tile" href="#radiography"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="3.5" cy="12" r="1.6" fill="currentColor" stroke="none"/><path d="M4 12l16-8M4 12l16 8M20 3.5v17M11 8.5v7"/></svg></span><span class="t">Proton Radiography</span><span class="d">Magnification and beam size at the object for a point proton source and an RCF stack.</span></a>
+        <a class="app-tile" href="#tpa"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="3" width="17" height="18" rx="2"/><path d="M7.5 6.5c.5 5 3.5 9.5 9.5 11.5"/><path d="M7.5 6.5c1.4 3.4 3.8 5.9 6.8 7" opacity=".55"/><circle cx="7.5" cy="6.5" r="1.3" fill="currentColor" stroke="none"/></svg></span><span class="t">TP Spectrum Analyser</span><span class="d">Ion spectra from image-plate scans: zero point, traces, filters and PSL calibration to dN/dE/dΩ files.</span></a>
+        <a class="app-tile" href="#tpview"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3v17h17"/><path d="M6.5 6c3 6 6 9 12 10.5"/><path d="M15.5 4v14" stroke-dasharray="2 2.4"/></svg></span><span class="t">TP Spectrum Viewer</span><span class="d">Saved spectra with a noise threshold and a draggable E<sub>max</sub>, and thesis-width figures.</span></a>
       </div>
     </div>
     <div class="home-group">
@@ -344,6 +395,178 @@ html { -webkit-text-size-adjust: 100%; }
         <a class="app-tile" href="#lens"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3c3.2 3 3.2 15 0 18-3.2-3-3.2-15 0-18z"/><path d="M2 12h20"/><path d="M5 12V6.5M3.5 8L5 6.5 6.5 8"/></svg></span><span class="t">Thin Lens</span><span class="d">Object and image distances and magnification, from a magnification or an object distance.</span></a>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ───────────── TP SPECTRUM ANALYSER (TPA_python) ───────────── -->
+<section class="view" id="view-tpa" hidden>
+  <div class="app">
+    <header>
+      <div><h1>TP Spectrum Analyser</h1><p class="lede">Ion spectra from Thomson parabola image-plate scans. Output files match the Python TP Analysis.</p></div>
+      <div class="model">x = qE L<sub>E</sub>(D<sub>E</sub> + L<sub>E</sub>/2) / 2E<sub>k</sub> · y = qB L<sub>B</sub>(D<sub>B</sub> + L<sub>B</sub>/2) / √(2mE<sub>k</sub>)</div>
+    </header>
+    <div class="col">
+      <section class="card" aria-labelledby="ta-h-shot">
+        <div class="sec"><h2 id="ta-h-shot">Shot</h2></div>
+        <div class="grid-fields">
+          <label for="ta-exp">Experiment</label><select id="ta-exp"></select>
+          <label for="ta-tp">TP</label><select id="ta-tp"></select>
+        </div>
+        <div class="btn-row"><button class="btn secondary small" id="ta-loadset" type="button">Load settings</button><button class="btn secondary small" id="ta-setfile-btn" type="button">Settings file…</button></div>
+        <div class="btn-row"><button class="btn" id="ta-load" type="button">Load scan</button></div>
+        <input type="file" id="ta-file" accept=".tif,.tiff,.png,image/tiff,image/png" class="hidden">
+        <input type="file" id="ta-setfile" accept=".txt,text/plain" class="hidden">
+        <div class="field-col"><label for="ta-stem">Output stem</label><input type="text" id="ta-stem" autocomplete="off" spellcheck="false"></div>
+        <p class="note" id="ta-name">–</p>
+      </section>
+      <section class="card" aria-labelledby="ta-h-spec">
+        <div class="sec"><h2 id="ta-h-spec">Spectrometer</h2></div>
+        <div class="ta-rows">
+          <label for="ta-ef">E field</label>
+          <div class="ta-ctl"><button class="mini" id="ta-edn" type="button" aria-label="Step the E field down">−</button><div class="inp wu"><input type="text" id="ta-ef" inputmode="decimal" autocomplete="off"><span class="unit">kV/cm</span></div><button class="mini" id="ta-eup" type="button" aria-label="Step the E field up">+</button></div>
+          <button class="mini" id="ta-es" type="button" aria-pressed="false" aria-label="E field polarity">+</button>
+          <label for="ta-estep">Fine step</label><div class="inp wu"><input type="text" id="ta-estep" inputmode="decimal" autocomplete="off" value="0.1"><span class="unit">kV/cm</span></div><span></span>
+          <label for="ta-bf">B field</label><div class="inp"><input type="text" id="ta-bf" inputmode="decimal" autocomplete="off"><span class="unit">T</span></div>
+          <button class="mini" id="ta-bs" type="button" aria-pressed="false" aria-label="B field polarity">+</button>
+          <label for="ta-bl">Magnet length</label><div class="inp"><input type="text" id="ta-bl" inputmode="decimal" autocomplete="off"><span class="unit">mm</span></div><span></span>
+          <label for="ta-ei">E plates start</label><div class="inp"><input type="text" id="ta-ei" inputmode="decimal" autocomplete="off"><span class="unit">mm</span></div><span></span>
+          <label for="ta-el">E plates length</label><div class="inp"><input type="text" id="ta-el" inputmode="decimal" autocomplete="off"><span class="unit">mm</span></div><span></span>
+          <label for="ta-det">Detector</label><div class="inp"><input type="text" id="ta-det" inputmode="decimal" autocomplete="off"><span class="unit">mm</span></div><span></span>
+          <label for="ta-sr">Solid angle</label><div class="inp"><input type="text" id="ta-sr" inputmode="decimal" autocomplete="off"><span class="unit">nSr</span></div><span></span>
+        </div>
+        <p class="note">Distances from the magnet entrance.</p>
+      </section>
+      <section class="card" aria-labelledby="ta-h-img">
+        <div class="sec"><h2 id="ta-h-img">Image plate</h2></div>
+        <div class="ta-rows">
+          <label for="ta-res">Resolution</label><div class="inp wu"><input type="text" id="ta-res" inputmode="decimal" autocomplete="off" list="ta-res-list"><span class="unit">µm/px</span></div><span></span>
+          <label for="ta-xzp">x zero</label><div class="inp"><input type="text" id="ta-xzp" inputmode="decimal" autocomplete="off"><span class="unit">mm</span></div><span></span>
+          <label for="ta-yzp">y zero</label><div class="inp"><input type="text" id="ta-yzp" inputmode="decimal" autocomplete="off"><span class="unit">mm</span></div><span></span>
+        </div>
+        <datalist id="ta-res-list"><option value="25"></option><option value="50"></option><option value="100"></option><option value="200"></option></datalist>
+        <div class="btn-row"><button class="btn secondary small" id="ta-pick-zp" type="button" aria-pressed="false">Pick zero point</button></div>
+        <div class="sf-list" id="ta-sliders"></div>
+        <div class="grid-fields"><label for="ta-cmap">Colour map</label><select id="ta-cmap"><option>inferno</option><option>viridis</option><option>magma</option><option>gray</option><option>turbo</option></select></div>
+        <div class="row-gap"><span class="note">Show</span><label class="chk"><input type="checkbox" id="ta-sh-axes" checked> Axes</label><label class="chk"><input type="checkbox" id="ta-sh-tr" checked> Traces</label><label class="chk"><input type="checkbox" id="ta-sh-fl" checked> Filters</label></div>
+      </section>
+      <section class="card" aria-labelledby="ta-h-sp">
+        <div class="sec"><h2 id="ta-h-sp">Species</h2><div class="tools"><button class="btn secondary small" id="ta-sp-add" type="button">Add</button></div></div>
+        <div class="tbl-grid ta-sp" id="ta-sp"></div>
+        <p class="note">E min / E max in MeV per nucleon.</p>
+      </section>
+      <section class="card" aria-labelledby="ta-h-fl">
+        <div class="sec"><h2 id="ta-h-fl">Filters</h2><div class="tools"><button class="btn secondary small" id="ta-fl-add" type="button">Add</button></div></div>
+        <div class="tbl-grid ta-fl" id="ta-fl"></div>
+        <div class="btn-row"><button class="btn secondary small" id="ta-pick-f" type="button" aria-pressed="false">Pick position</button><button class="btn secondary small" id="ta-shift-f" type="button" aria-pressed="false">Shift all</button></div>
+        <p class="note">Click a y box, then Pick position and click the image.</p>
+      </section>
+      <section class="card" aria-labelledby="ta-h-an">
+        <div class="sec"><h2 id="ta-h-an">Analysis</h2></div>
+        <div class="ta-rows two">
+          <label for="ta-tw">Trace width</label><div class="inp"><input type="text" id="ta-tw" inputmode="decimal" autocomplete="off"><span class="unit">px</span></div>
+          <label class="chk"><input type="checkbox" id="ta-bgl"> Background left</label><div class="inp wu"><input type="text" id="ta-bglp" inputmode="decimal" autocomplete="off" aria-label="Left background gap"><span class="unit">px gap</span></div>
+          <label class="chk"><input type="checkbox" id="ta-bgr"> Background right</label><div class="inp wu"><input type="text" id="ta-bgrp" inputmode="decimal" autocomplete="off" aria-label="Right background gap"><span class="unit">px gap</span></div>
+          <label class="chk"><input type="checkbox" id="ta-dt"> Noise trace</label><div class="inp wu"><input type="text" id="ta-dtmm" inputmode="decimal" autocomplete="off" aria-label="Noise trace offset"><span class="unit">mm offset</span></div>
+          <label class="chk"><input type="checkbox" id="ta-fad"> Fading</label><div class="inp"><input type="text" id="ta-fadt" inputmode="decimal" autocomplete="off" aria-label="Time from shot to scan"><span class="unit">min</span></div>
+          <label class="chk"><input type="checkbox" id="ta-cal"> PSL calibration</label><span></span>
+        </div>
+        <div class="btn-row"><button class="btn" id="ta-get" type="button">Get spectra</button></div>
+        <div class="btn-row"><button class="btn secondary small" id="ta-psave" type="button">Save parameters</button><button class="btn secondary small" id="ta-pload" type="button">Load parameters</button></div>
+        <input type="file" id="ta-pfile" accept=".json,application/json" class="hidden">
+      </section>
+    </div>
+    <main class="col">
+      <section class="card" aria-label="Scan and spectra">
+        <div class="sec">
+          <div class="seg" role="group" aria-label="View"><button type="button" id="ta-tab-img" aria-pressed="true">Image plate</button><button type="button" id="ta-tab-spec" aria-pressed="false">Spectra</button><button type="button" id="ta-tab-ion" aria-pressed="false">Ion range</button></div>
+          <div class="tools"><button class="btn secondary small" id="ta-reset" type="button">Reset zoom</button><button class="btn secondary small" id="ta-png" type="button">Save PNG</button></div>
+        </div>
+        <div class="panel" id="ta-p-img"><div class="plot-wrap tall" id="ta-iwrap"><canvas id="ta-img" aria-label="Image plate scan with the traces, background strips and filter bands"></canvas></div></div>
+        <div class="panel" id="ta-p-spec" hidden><div class="plot-wrap" id="ta-swrap" style="height:520px"><canvas id="ta-spec" aria-label="dN/dE/dΩ for each species"></canvas></div></div>
+        <div class="panel" id="ta-p-ion" hidden>
+          <div class="ion-ctl">
+            <div><label for="ta-ion-ion">Ion</label><select id="ta-ion-ion"><option>proton</option><option>carbon</option><option>gold</option></select></div>
+            <div><label for="ta-ion-mat">Material</label><select id="ta-ion-mat"><option>Al</option><option>Kapton</option></select></div>
+            <div><label for="ta-ion-e">E in (<span class="u">MeV/u</span>)</label><input type="text" id="ta-ion-e" inputmode="decimal" value="10"></div>
+            <div><label for="ta-ion-d">Thickness (<span class="u">µm</span>)</label><input type="text" id="ta-ion-d" inputmode="decimal" value="10"></div>
+            <div><label for="ta-ion-s">Step (<span class="u">µm</span>)</label><input type="text" id="ta-ion-s" inputmode="decimal" value="0.01"></div>
+          </div>
+          <div class="btn-row"><button class="btn secondary small" id="ta-ion-pt" type="button">Energy out / range</button><button class="btn secondary small" id="ta-ion-scan" type="button">Scan 0 – E</button></div>
+          <p class="note" id="ta-ion-out">&nbsp;</p>
+          <div class="plot-wrap" id="ta-rwrap"><canvas id="ta-ion" aria-label="Energy out against energy in"></canvas></div>
+        </div>
+        <p class="readout" id="ta-read"></p>
+      </section>
+      <section class="card hidden" id="ta-results" aria-labelledby="ta-h-res">
+        <div class="sec"><h2 id="ta-h-res">Spectrum files</h2><div class="tools"><button class="btn secondary small" id="ta-zip" type="button">Save all (.zip)</button><button class="btn secondary small" id="ta-toview" type="button">Open in Spectrum Viewer</button></div></div>
+        <div class="tbl-wrap"><table><thead><tr><th>Species</th><th class="num">E (<span class="u">MeV/u</span>)</th><th class="num">Points</th><th>File</th><th></th></tr></thead><tbody id="ta-res-body"></tbody></table></div>
+        <p class="note">Columns: E (MeV/n), PSL − background, N, dN/dE, dN/dE/dΩ, then noise if the noise trace is on. The zip also holds the parameters JSON.</p>
+      </section>
+    </main>
+  </div>
+</section>
+
+<!-- ───────────── TP SPECTRUM VIEWER (TP_plotter.py) ───────────── -->
+<section class="view" id="view-tpview" hidden>
+  <div class="app">
+    <header>
+      <div><h1>TP Spectrum Viewer</h1><p class="lede">Ion spectra with a moving-mean + nσ noise threshold and a movable E<sub>max</sub>.</p></div>
+    </header>
+    <div class="col">
+      <section class="card" aria-labelledby="sv-h-files">
+        <div class="sec"><h2 id="sv-h-files">Spectra</h2></div>
+        <div class="btn-row"><button class="btn" id="sv-load" type="button">Load spectra</button><button class="btn secondary small" id="sv-prev" type="button">◀ Prev</button><button class="btn secondary small" id="sv-next" type="button">Next ▶</button></div>
+        <input type="file" id="sv-file" accept=".txt,text/plain" multiple class="hidden">
+        <p class="note">Select several files to step through them, or drop them on this page.</p>
+      </section>
+      <section class="card" aria-labelledby="sv-h-emax">
+        <div class="sec"><h2 id="sv-h-emax">Max energy</h2></div>
+        <div class="grid-fields"><label for="sv-emax">E<sub>max</sub></label><div class="inp wu"><input type="text" id="sv-emax" inputmode="decimal" autocomplete="off"><span class="unit">MeV/u</span></div></div>
+        <div class="btn-row"><button class="btn secondary small" id="sv-reset" type="button">Reset to auto-detected</button></div>
+        <p class="note">Drag the dash-dot line on the plot, or type a value. The saved figure uses this E<sub>max</sub>.</p>
+      </section>
+      <section class="card" aria-labelledby="sv-h-noise">
+        <div class="sec"><h2 id="sv-h-noise">Noise threshold</h2></div>
+        <div class="grid-fields">
+          <label for="sv-win">Window</label><div class="inp wu"><input type="text" id="sv-win" inputmode="decimal" autocomplete="off"><span class="unit">MeV/u</span></div>
+          <label for="sv-ns">N sigma</label><input type="text" id="sv-ns" inputmode="decimal" autocomplete="off">
+          <label for="sv-minw">Min width</label><div class="inp wu"><input type="text" id="sv-minw" inputmode="decimal" autocomplete="off"><span class="unit">MeV/u</span></div>
+          <label for="sv-smooth">Signal smooth</label><div class="inp"><input type="text" id="sv-smooth" inputmode="decimal" autocomplete="off"><span class="unit">pts</span></div>
+          <label for="sv-mode">Threshold line</label><select id="sv-mode"><option value="fit">Fitted curve</option><option value="moving">Moving mean + nσ</option></select>
+        </div>
+      </section>
+      <section class="card" aria-labelledby="sv-h-mask">
+        <div class="sec"><h2 id="sv-h-mask">Analysis mask</h2></div>
+        <div class="grid-fields">
+          <label for="sv-mlo">Mask min</label><div class="inp wu"><input type="text" id="sv-mlo" inputmode="decimal" autocomplete="off"><span class="unit">MeV/u</span></div>
+          <label for="sv-mhi">Mask max</label><div class="inp wu"><input type="text" id="sv-mhi" inputmode="decimal" autocomplete="off"><span class="unit">MeV/u</span></div>
+        </div>
+      </section>
+      <section class="card" aria-labelledby="sv-h-axes">
+        <div class="sec"><h2 id="sv-h-axes">Axis limits</h2><div class="tools"><button class="btn secondary small" id="sv-fit" type="button">Auto-fit</button></div></div>
+        <div class="grid-fields">
+          <label for="sv-x0">x min</label><div class="inp wu"><input type="text" id="sv-x0" inputmode="decimal" autocomplete="off"><span class="unit">MeV/u</span></div>
+          <label for="sv-x1">x max</label><div class="inp wu"><input type="text" id="sv-x1" inputmode="decimal" autocomplete="off"><span class="unit">MeV/u</span></div>
+          <label for="sv-y0">y min</label><div class="inp wu"><input type="text" id="sv-y0" inputmode="decimal" autocomplete="off"><span class="unit">log₁₀</span></div>
+          <label for="sv-y1">y max</label><div class="inp wu"><input type="text" id="sv-y1" inputmode="decimal" autocomplete="off"><span class="unit">log₁₀</span></div>
+        </div>
+      </section>
+    </div>
+    <main class="col">
+      <div class="summary cols-5">
+        <div class="stat"><div class="k">Species</div><div class="v" id="sv-t-sp">–</div></div>
+        <div class="stat"><div class="k">TP / angle</div><div class="v" id="sv-t-tp">–</div></div>
+        <div class="stat"><div class="k">Auto E<sub>max</sub></div><div class="v" id="sv-t-auto">–</div></div>
+        <div class="stat"><div class="k">Low-E cutoff</div><div class="v" id="sv-t-lo">–</div></div>
+        <div class="stat"><div class="k">File end</div><div class="v" id="sv-t-end">–</div></div>
+      </div>
+      <p class="pill warn hidden" id="sv-warn"></p>
+      <section class="card" aria-labelledby="sv-h-plot">
+        <div class="sec"><h2 id="sv-h-plot">Spectrum</h2><div class="tools"><button class="btn secondary small" id="sv-png" type="button">Save PNG</button><button class="btn secondary small" id="sv-pdf" type="button">Save PDF</button></div></div>
+        <div class="plot-wrap" id="sv-wrap" style="height:520px"><canvas id="sv-plot" aria-label="Spectrum with noise threshold and E max"></canvas></div>
+        <p class="note" id="sv-name">No file loaded</p>
+      </section>
+    </main>
   </div>
 </section>
 
@@ -2298,6 +2521,20 @@ LOS.sci = (v, d = 3) => {   // 1.234 × 10²⁰ as HTML
 };
 LOS.sciText = (v, d = 3) => (Number.isFinite(v) ? v.toExponential(d) : "–");
 LOS.count = v => (Number.isFinite(v) ? Math.round(v).toLocaleString("en-GB") : "–");
+// Python's f"{v:g}" (6 significant figures, trailing zeros dropped)
+LOS.pyG = (v, p = 6) => {   // also f"{v:.4g}" with p = 4
+  if (Number.isNaN(v)) return "nan";
+  if (!Number.isFinite(v)) return v > 0 ? "inf" : "-inf";
+  if (v === 0) return Object.is(v, -0) ? "-0" : "0";
+  const [mant, ex] = v.toExponential(p - 1).split("e"), X = +ex;
+  const trim = s => (s.includes(".") ? s.replace(/0+$/, "").replace(/\.$/, "") : s);
+  if (X < -4 || X >= p) return `${trim(mant)}e${X < 0 ? "-" : "+"}${String(Math.abs(X)).padStart(2, "0")}`;
+  return trim(v.toFixed(Math.max(0, p - 1 - X)));
+};
+// Python's round(): halves go to the even neighbour
+LOS.pyRound = x => { const f = Math.floor(x), d = x - f; return d > 0.5 ? f + 1 : d < 0.5 ? f : (f % 2 === 0 ? f : f + 1); };
+const SUP = { "0": "⁰", "1": "¹", "2": "²", "3": "³", "4": "⁴", "5": "⁵", "6": "⁶", "7": "⁷", "8": "⁸", "9": "⁹", "-": "⁻", "+": "⁺" };
+LOS.sup = s => String(s).replace(/[0-9+-]/g, c => SUP[c]);
 
 // ---------- notices + file saving (same behaviour as the TP simulator) ----------
 let msgTimer = 0;
@@ -2315,7 +2552,7 @@ const getDownloads = () => {
   return downloadsP;
 };
 // Outside Claude (a downloaded file, or the home-screen app): phones get the share sheet, computers a download.
-const MIME = { png: "image/png", mp4: "video/mp4", webm: "video/webm", json: "application/json", csv: "text/csv", txt: "text/plain", html: "text/html" };
+const MIME = { png: "image/png", mp4: "video/mp4", webm: "video/webm", json: "application/json", csv: "text/csv", txt: "text/plain", html: "text/html", zip: "application/zip", pdf: "application/pdf" };
 LOS.standaloneSave = async (name, data) => {
   const type = MIME[name.split(".").pop().toLowerCase()] || "application/octet-stream";
   const blob = data instanceof Blob && data.type ? data : new Blob([data], { type });
@@ -2376,6 +2613,38 @@ LOS.tickFmt = (v, step) => {
   const d = step >= 1 ? 0 : Math.min(6, Math.ceil(-Math.log10(step) - 1e-9));
   return v.toFixed(d).replace("-", "−");
 };
+// Log axis ticks between 10^l0 and 10^l1: decades (labelled "10^n", thinned when there are many), 2–9 minors,
+// and 2 / 5 labels when less than about a decade and a half is shown.
+LOS.logTicks = (l0, l1, nWanted = 6) => {
+  const major = [], minor = [];
+  if (!(l1 > l0) || !Number.isFinite(l0) || !Number.isFinite(l1)) return { major, minor };
+  const d0 = Math.floor(l0), d1 = Math.ceil(l1), every = Math.max(1, Math.ceil((d1 - d0) / Math.max(2, nWanted)));
+  const inside = v => { const l = Math.log10(v); return l >= l0 - 1e-9 && l <= l1 + 1e-9; };
+  const few = l1 - l0 < 1.6;
+  for (let d = d0; d <= d1; d++) {
+    const p = Math.pow(10, d);
+    if (inside(p)) major.push({ v: p, label: (d - d0) % every === 0 ? `10^${d}` : "" });
+    for (let j = 2; j <= 9; j++) {
+      const v = j * p; if (!inside(v)) continue;
+      if (few && (j === 2 || j === 5)) major.push({ v, label: `${j}×10^${d}` }); else minor.push(v);
+    }
+  }
+  return { major, minor };
+};
+// Draws "a^b" with b raised and smaller (tick labels like 10^−3 without relying on superscript glyphs)
+LOS.powLabel = (ctx, text, x, y, align, size, family) => {
+  const k = text.indexOf("^");
+  ctx.save(); ctx.textBaseline = "middle";
+  if (k < 0) { ctx.textAlign = align; ctx.font = `${size}px ${family}`; ctx.fillText(text, x, y); ctx.restore(); return; }
+  const base = text.slice(0, k), ex = text.slice(k + 1).replace("-", "−");
+  ctx.font = `${size}px ${family}`; const wb = ctx.measureText(base).width;
+  ctx.font = `${Math.round(size * 0.78)}px ${family}`; const we = ctx.measureText(ex).width;
+  const x0 = align === "right" ? x - wb - we : align === "center" ? x - (wb + we) / 2 : x;
+  ctx.textAlign = "left";
+  ctx.font = `${size}px ${family}`; ctx.fillText(base, x0, y);
+  ctx.font = `${Math.round(size * 0.78)}px ${family}`; ctx.fillText(ex, x0 + wb, y - size * 0.38);
+  ctx.restore();
+};
 // Axes with optional twin y axis. Returns mappers and drawing helpers.
 LOS.chart = (canvas, spec, target) => {
   const { ctx, w: W, h: H } = target || LOS.fitCanvas(canvas);
@@ -2384,17 +2653,27 @@ LOS.chart = (canvas, spec, target) => {
   const m = { l: spec.ml ?? 64, r: spec.y2 ? (spec.mr ?? 66) : (spec.mr ?? 18), t: spec.mt ?? 14, b: spec.mb ?? 44 };
   const pw = Math.max(10, W - m.l - m.r), ph = Math.max(10, H - m.t - m.b);
   const xr = spec.x, yr = spec.y, y2 = spec.y2;
+  const ylog = !!yr.log, ly = v => (ylog ? Math.log10(v) : v), yl0 = ly(yr.min), yl1 = ly(yr.max);
   const X = v => m.l + (v - xr.min) / (xr.max - xr.min) * pw;
-  const Y = v => m.t + ph - (v - yr.min) / (yr.max - yr.min) * ph;
+  const Y = v => m.t + ph - (ly(v) - yl0) / (yl1 - yl0) * ph;
   const Y2 = y2 ? (v => m.t + ph - (v - y2.min) / (y2.max - y2.min) * ph) : null;
   const nx = Math.max(3, Math.round(pw / 90)), ny = Math.max(3, Math.round(ph / 55));
-  const xt = LOS.ticks(xr.min, xr.max, nx), yt = LOS.ticks(yr.min, yr.max, ny);
-  const xs = LOS.niceStep(xr.max - xr.min, nx), ys = LOS.niceStep(yr.max - yr.min, ny);
+  const xt = LOS.ticks(xr.min, xr.max, nx);
+  const xs = LOS.niceStep(xr.max - xr.min, nx);
   ctx.lineWidth = 1; ctx.strokeStyle = T.border; ctx.font = `11px ${T.mono}`;
   ctx.fillStyle = T.sub; ctx.textAlign = "center"; ctx.textBaseline = "top";
   for (const t of xt) { const x = Math.round(X(t)) + 0.5; ctx.beginPath(); ctx.moveTo(x, m.t); ctx.lineTo(x, m.t + ph); ctx.stroke(); ctx.fillText((xr.fmt || LOS.tickFmt)(t, xs), x, m.t + ph + 6); }
   ctx.textAlign = "right"; ctx.textBaseline = "middle"; ctx.fillStyle = yr.color || T.sub;
-  for (const t of yt) { const y = Math.round(Y(t)) + 0.5; ctx.beginPath(); ctx.moveTo(m.l, y); ctx.lineTo(m.l + pw, y); ctx.stroke(); ctx.fillText((yr.fmt || LOS.tickFmt)(t, ys), m.l - 7, y); }
+  if (ylog) {
+    const ticks = LOS.logTicks(yl0, yl1, ny);
+    ctx.save(); ctx.strokeStyle = LOS.hexA(T.border, 0.55);
+    for (const v of ticks.minor) { const y = Math.round(Y(v)) + 0.5; ctx.beginPath(); ctx.moveTo(m.l, y); ctx.lineTo(m.l + pw, y); ctx.stroke(); }
+    ctx.restore();
+    for (const t of ticks.major) { const y = Math.round(Y(t.v)) + 0.5; ctx.beginPath(); ctx.moveTo(m.l, y); ctx.lineTo(m.l + pw, y); ctx.stroke(); if (t.label) LOS.powLabel(ctx, t.label, m.l - 7, y, "right", 11, T.mono); }
+  } else {
+    const yt = LOS.ticks(yr.min, yr.max, ny), ys = LOS.niceStep(yr.max - yr.min, ny);
+    for (const t of yt) { const y = Math.round(Y(t)) + 0.5; ctx.beginPath(); ctx.moveTo(m.l, y); ctx.lineTo(m.l + pw, y); ctx.stroke(); ctx.fillText((yr.fmt || LOS.tickFmt)(t, ys), m.l - 7, y); }
+  }
   if (y2) {
     const n2 = LOS.ticks(y2.min, y2.max, ny), s2 = LOS.niceStep(y2.max - y2.min, ny);
     ctx.textAlign = "left"; ctx.fillStyle = y2.color || T.sub;
@@ -2466,6 +2745,7 @@ LOS.sliderField = (host, o) => {
   const round = v => {
     if (o.log) return +v.toPrecision(o.sig || 3);
     if (o.step) v = Math.round(v / o.step) * o.step;
+    if (o.sig) return v === 0 ? 0 : +v.toPrecision(o.sig);
     return +v.toFixed(o.decimals ?? (o.step ? Math.max(0, -Math.floor(Math.log10(o.step) + 1e-9)) : 3));
   };
   const valid = v => Number.isFinite(v) && (!o.check || o.check(v));
@@ -2481,7 +2761,7 @@ LOS.sliderField = (host, o) => {
   const f = {
     el: wrap, input: txt,
     get value() { const raw = txt.value.trim(), v = Number(raw); return raw !== "" && valid(v) ? v : NaN; },
-    set(v, quiet) { txt.value = Number.isFinite(v) ? (o.log ? +(+v).toPrecision(o.sig || 4) : +(+v).toFixed(o.decimals ?? 4)) : ""; txt.setAttribute("aria-invalid", "false"); placeSlider(v); if (!quiet) fire(); },
+    set(v, quiet) { txt.value = Number.isFinite(v) ? (o.log || o.sig ? +(+v).toPrecision(o.sig || 4) : +(+v).toFixed(o.decimals ?? 4)) : ""; txt.setAttribute("aria-invalid", "false"); placeSlider(v); if (!quiet) fire(); },
     setRange(a, b) { min = a; max = b; const v = Number(txt.value); if (Number.isFinite(v)) placeSlider(v); },
     onChange(fn) { listeners.push(fn); },
   };
@@ -2528,6 +2808,102 @@ LOS.pinch = (wrap, canvas) => {
   wrap.addEventListener("pointercancel", up, true);
 };
 LOS.debounce = (fn, ms = 150) => { let t = 0; return () => { clearTimeout(t); t = setTimeout(fn, ms); }; };
+
+// ---------- colourmaps (matplotlib stops, linearly interpolated into 256-entry tables) ----------
+const hexes = s => s.split(" ").map(h => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)]);
+const even = list => list.map((c, i) => [i / (list.length - 1), c]);
+LOS.CMAPS = {
+  jet: [[0, [0, 0, 127]], [0.125, [0, 0, 255]], [0.375, [0, 255, 255]], [0.625, [255, 255, 0]], [0.875, [255, 0, 0]], [1, [127, 0, 0]]],
+  turbo: even(hexes("#30123b #4145ab #4675ed #39a2fc #1bcfd4 #24eca6 #61fc6c #a4fc3b #d1e834 #f3c63a #fe9b2d #f36315 #d93806 #b11901 #7a0402")),
+  viridis: even(hexes("#440154 #482878 #3e4989 #31688e #26828e #1f9e89 #35b779 #6ece58 #b5de2b #fde725")),
+  plasma: even(hexes("#0d0887 #46039f #7201a8 #9c179e #bd3786 #d8576b #ed7953 #fb9f3a #fdca26 #f0f921")),
+  inferno: even(hexes("#000004 #1b0c41 #4a0c6b #781c6d #a52c60 #cf4446 #ed6925 #fb9b06 #f7d13d #fcffa4")),
+  magma: even(hexes("#000004 #180f3d #440f76 #721f81 #9e2f7f #cd4071 #f1605d #fd9668 #feca8d #fcfdbf")),
+  hot: [[0, [10, 0, 0]], [0.365, [255, 0, 0]], [0.746, [255, 255, 0]], [1, [255, 255, 255]]],
+  gray: [[0, [0, 0, 0]], [1, [255, 255, 255]]],
+  cividis: even(hexes("#00224e #123570 #3b496c #575d6d #707173 #8a8678 #a59c74 #c3b369 #e1cc55 #fee838")),
+};
+const lutCache = {};
+LOS.lut = name => {
+  if (lutCache[name]) return lutCache[name];
+  const stops = LOS.CMAPS[name] || LOS.CMAPS.jet, out = new Uint8ClampedArray(256 * 3);
+  for (let i = 0; i < 256; i++) {
+    const t = i / 255;
+    let k = 0; while (k < stops.length - 2 && t > stops[k + 1][0]) k++;
+    const [t0, c0] = stops[k], [t1, c1] = stops[k + 1], f = Math.min(1, Math.max(0, (t - t0) / (t1 - t0)));
+    for (let c = 0; c < 3; c++) out[i * 3 + c] = c0[c] + (c1[c] - c0[c]) * f;
+  }
+  return (lutCache[name] = out);
+};
+
+// ---------- image files (TIFF via UTIF, loaded on first use; PNG/JPEG via the browser) ----------
+// colour images: "luma" (Rec. 601 weights) or "mean" (plain channel average, like numpy img.mean(axis=2))
+const loaded = {};
+LOS.loadScript = src => loaded[src] || (loaded[src] = new Promise((ok, fail) => { const s = document.createElement("script"); s.src = src; s.onload = ok; s.onerror = () => { delete loaded[src]; fail(new Error("couldn't download the TIFF reader")); }; document.head.appendChild(s); }));
+async function decodeTiff(buf, mode) {
+  await LOS.loadScript("vendor/pako.min.js");
+  await LOS.loadScript("vendor/UTIF.js");
+  const ifds = window.UTIF.decode(buf);
+  const ifd = ifds.find(d => d.t256 && d.t257) || ifds[0];
+  if (!ifd) throw new Error("no image found in the file");
+  window.UTIF.decodeImage(buf, ifd, ifds);
+  const w = ifd.width, h = ifd.height, bps = ifd.t258 ? ifd.t258[0] : 8, spp = ifd.t277 ? ifd.t277[0] : 1, fmt = ifd.t339 ? ifd.t339[0] : 1;
+  const d = ifd.data;
+  const out = bps === 32 && fmt !== 3 || bps === 64 ? new Float64Array(w * h) : new Float32Array(w * h);   // keep 32-bit integers exact
+  const mix = mode === "mean" ? (v => v.reduce((a, c) => a + c, 0) / v.length) : (v => 0.299 * v[0] + 0.587 * v[1] + 0.114 * v[2]);
+  if (bps === 8 || bps === 16 || bps === 32 || bps === 64) {
+    const dv = new DataView(d.buffer, d.byteOffset, d.byteLength), B = bps / 8, le = bps === 16 ? true : !!ifd.isLE;
+    const rd = o => (bps === 8 ? dv.getUint8(o) : bps === 16 ? (fmt === 2 ? dv.getInt16(o, le) : dv.getUint16(o, le))
+      : bps === 64 ? dv.getFloat64(o, le) : fmt === 3 ? dv.getFloat32(o, le) : fmt === 2 ? dv.getInt32(o, le) : dv.getUint32(o, le));
+    const nch = mode === "mean" ? spp : 3, px = new Array(nch);
+    for (let i = 0; i < w * h; i++) {
+      const o = i * spp * B;
+      if (spp >= 3) { for (let c = 0; c < nch; c++) px[c] = rd(o + c * B); out[i] = mix(px); } else out[i] = rd(o);
+    }
+  } else {
+    const rgba = window.UTIF.toRGBA8(ifd);
+    for (let i = 0; i < w * h; i++) out[i] = mix([rgba[i * 4], rgba[i * 4 + 1], rgba[i * 4 + 2]]);
+  }
+  return { data: out, w, h, bps };
+}
+async function decodeBitmap(file, mode) {
+  const bmp = await createImageBitmap(file);
+  const c = document.createElement("canvas"); c.width = bmp.width; c.height = bmp.height;
+  const x = c.getContext("2d", { willReadFrequently: true }); x.drawImage(bmp, 0, 0);
+  const d = x.getImageData(0, 0, c.width, c.height).data, out = new Float32Array(c.width * c.height);
+  if (mode === "mean") for (let i = 0; i < out.length; i++) out[i] = (d[i * 4] + d[i * 4 + 1] + d[i * 4 + 2]) / 3;
+  else for (let i = 0; i < out.length; i++) out[i] = 0.299 * d[i * 4] + 0.587 * d[i * 4 + 1] + 0.114 * d[i * 4 + 2];
+  return { data: out, w: c.width, h: c.height, bps: 8 };
+}
+LOS.readImage = async (file, mode = "luma") => {
+  const ext = file.name.toLowerCase().split(".").pop();
+  return ext.startsWith("tif") ? decodeTiff(await file.arrayBuffer(), mode) : decodeBitmap(file, mode);
+};
+
+// ---------- zip (stored, no compression) so several result files save as one download ----------
+const CRC = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+LOS.zip = files => {   // files: [{ name, data: string | Uint8Array }]
+  const enc = new TextEncoder(), parts = [], central = [];
+  const now = new Date(), dt = ((now.getHours() << 11) | (now.getMinutes() << 5) | (now.getSeconds() >> 1)) & 0xFFFF;
+  const dd = (((now.getFullYear() - 1980) << 9) | ((now.getMonth() + 1) << 5) | now.getDate()) & 0xFFFF;
+  let off = 0;
+  for (const f of files) {
+    const name = enc.encode(f.name), data = typeof f.data === "string" ? enc.encode(f.data) : f.data;
+    let c = 0xFFFFFFFF; for (let i = 0; i < data.length; i++) c = CRC[(c ^ data[i]) & 255] ^ (c >>> 8); c = (c ^ 0xFFFFFFFF) >>> 0;
+    const lh = new DataView(new ArrayBuffer(30));
+    [[0, 0x04034b50, 4], [4, 20, 2], [6, 0x0800, 2], [8, 0, 2], [10, dt, 2], [12, dd, 2], [14, c, 4], [18, data.length, 4], [22, data.length, 4], [26, name.length, 2], [28, 0, 2]]
+      .forEach(([o, v, n]) => (n === 4 ? lh.setUint32(o, v, true) : lh.setUint16(o, v, true)));
+    const ch = new DataView(new ArrayBuffer(46));
+    [[0, 0x02014b50, 4], [4, 20, 2], [6, 20, 2], [8, 0x0800, 2], [10, 0, 2], [12, dt, 2], [14, dd, 2], [16, c, 4], [20, data.length, 4], [24, data.length, 4], [28, name.length, 2],
+      [30, 0, 2], [32, 0, 2], [34, 0, 2], [36, 0, 2], [38, 0, 4], [42, off, 4]].forEach(([o, v, n]) => (n === 4 ? ch.setUint32(o, v, true) : ch.setUint16(o, v, true)));
+    parts.push(lh, name, data); central.push(ch, name);
+    off += 30 + name.length + data.length;
+  }
+  const size = central.reduce((a, p) => a + p.byteLength, 0), end = new DataView(new ArrayBuffer(22));
+  [[0, 0x06054b50, 4], [4, 0, 2], [6, 0, 2], [8, files.length, 2], [10, files.length, 2], [12, size, 4], [16, off, 4], [20, 0, 2]]
+    .forEach(([o, v, n]) => (n === 4 ? end.setUint32(o, v, true) : end.setUint16(o, v, true)));
+  return new Blob([...parts, ...central, end], { type: "application/zip" });
+};
 })();
 </script>
 <script>
@@ -3147,32 +3523,7 @@ const EE_COL = "#00FFD0", FWHM_COL = "#FF3B6B";
 const CENTROID_THRESH = 0.10;
 const BIN = 0.05;   // px, radial bin for the encircled-energy curve
 
-// ---------- colourmaps (matplotlib stops, linearly interpolated) ----------
-const hexes = s => s.split(" ").map(h => [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)]);
-const even = list => list.map((c, i) => [i / (list.length - 1), c]);
-const CMAPS = {
-  jet: [[0, [0, 0, 127]], [0.125, [0, 0, 255]], [0.375, [0, 255, 255]], [0.625, [255, 255, 0]], [0.875, [255, 0, 0]], [1, [127, 0, 0]]],
-  turbo: even(hexes("#30123b #4145ab #4675ed #39a2fc #1bcfd4 #24eca6 #61fc6c #a4fc3b #d1e834 #f3c63a #fe9b2d #f36315 #d93806 #b11901 #7a0402")),
-  viridis: even(hexes("#440154 #482878 #3e4989 #31688e #26828e #1f9e89 #35b779 #6ece58 #b5de2b #fde725")),
-  plasma: even(hexes("#0d0887 #46039f #7201a8 #9c179e #bd3786 #d8576b #ed7953 #fb9f3a #fdca26 #f0f921")),
-  inferno: even(hexes("#000004 #1b0c41 #4a0c6b #781c6d #a52c60 #cf4446 #ed6925 #fb9b06 #f7d13d #fcffa4")),
-  magma: even(hexes("#000004 #180f3d #440f76 #721f81 #9e2f7f #cd4071 #f1605d #fd9668 #feca8d #fcfdbf")),
-  hot: [[0, [10, 0, 0]], [0.365, [255, 0, 0]], [0.746, [255, 255, 0]], [1, [255, 255, 255]]],
-  gray: [[0, [0, 0, 0]], [1, [255, 255, 255]]],
-  cividis: even(hexes("#00224e #123570 #3b496c #575d6d #707173 #8a8678 #a59c74 #c3b369 #e1cc55 #fee838")),
-};
-const lutCache = {};
-function lut(name) {
-  if (lutCache[name]) return lutCache[name];
-  const stops = CMAPS[name] || CMAPS.jet, out = new Uint8ClampedArray(256 * 3);
-  for (let i = 0; i < 256; i++) {
-    const t = i / 255;
-    let k = 0; while (k < stops.length - 2 && t > stops[k + 1][0]) k++;
-    const [t0, c0] = stops[k], [t1, c1] = stops[k + 1], f = Math.min(1, Math.max(0, (t - t0) / (t1 - t0)));
-    for (let c = 0; c < 3; c++) out[i * 3 + c] = c0[c] + (c1[c] - c0[c]) * f;
-  }
-  return (lutCache[name] = out);
-}
+const lut = LOS.lut;
 
 // ---------- state + inputs ----------
 const S = { raw: null, w: 0, h: 0, name: "", res: null, cornerMeans: [0, 0, 0, 0], box: 250 };
@@ -3481,45 +3832,12 @@ function setImage(raw, w, h, name) {
   $("fs-name").textContent = `${name}   (${w} × ${h} px)`;
   full();
 }
-const loaded = {};
-const loadScript = src => loaded[src] || (loaded[src] = new Promise((ok, fail) => { const s = document.createElement("script"); s.src = src; s.onload = ok; s.onerror = () => { delete loaded[src]; fail(new Error("couldn't download the TIFF reader")); }; document.head.appendChild(s); }));
-async function decodeTiff(buf) {
-  await loadScript("vendor/pako.min.js");
-  await loadScript("vendor/UTIF.js");
-  const ifds = window.UTIF.decode(buf);
-  const ifd = ifds.find(d => d.t256 && d.t257) || ifds[0];
-  if (!ifd) throw new Error("no image found in the file");
-  window.UTIF.decodeImage(buf, ifd, ifds);
-  const w = ifd.width, h = ifd.height, bps = ifd.t258 ? ifd.t258[0] : 8, spp = ifd.t277 ? ifd.t277[0] : 1, fmt = ifd.t339 ? ifd.t339[0] : 1;
-  const d = ifd.data, out = new Float32Array(w * h);
-  const luma = (a, b, c) => 0.299 * a + 0.587 * b + 0.114 * c;
-  if (bps === 16 || bps === 32 || bps === 8) {
-    const dv = new DataView(d.buffer, d.byteOffset, d.byteLength), B = bps / 8, le = bps === 16 ? true : !!ifd.isLE;
-    const rd = o => (bps === 8 ? dv.getUint8(o) : bps === 16 ? (fmt === 2 ? dv.getInt16(o, le) : dv.getUint16(o, le)) : fmt === 3 ? dv.getFloat32(o, le) : fmt === 2 ? dv.getInt32(o, le) : dv.getUint32(o, le));
-    for (let i = 0; i < w * h; i++) {
-      const o = i * spp * B;
-      out[i] = spp >= 3 ? luma(rd(o), rd(o + B), rd(o + 2 * B)) : rd(o);
-    }
-  } else {
-    const rgba = window.UTIF.toRGBA8(ifd);
-    for (let i = 0; i < w * h; i++) out[i] = luma(rgba[i * 4], rgba[i * 4 + 1], rgba[i * 4 + 2]);
-  }
-  return { data: out, w, h, bps };
-}
-async function decodeBitmap(file) {
-  const bmp = await createImageBitmap(file);
-  const c = document.createElement("canvas"); c.width = bmp.width; c.height = bmp.height;
-  const x = c.getContext("2d", { willReadFrequently: true }); x.drawImage(bmp, 0, 0);
-  const d = x.getImageData(0, 0, c.width, c.height).data, out = new Float32Array(c.width * c.height);
-  for (let i = 0; i < out.length; i++) out[i] = 0.299 * d[i * 4] + 0.587 * d[i * 4 + 1] + 0.114 * d[i * 4 + 2];
-  return { data: out, w: c.width, h: c.height, bps: 8 };
-}
 async function loadFile(file) {
   const ext = file.name.toLowerCase().split(".").pop();
   if (!["tif", "tiff", "png", "jpg", "jpeg"].includes(ext)) { LOS.toast("Use a TIFF or PNG image.", "warn"); return; }
   LOS.toast(`Reading ${file.name}…`);
   try {
-    const img = ext.startsWith("tif") ? await decodeTiff(await file.arrayBuffer()) : await decodeBitmap(file);
+    const img = await LOS.readImage(file, "luma");
     setImage(img.data, img.w, img.h, file.name);
     LOS.toast(`Loaded ${file.name} (${img.w} × ${img.h} px, ${img.bps}-bit).`, "good");
   } catch (err) { LOS.toast(`Couldn't read ${file.name}: ${err.message || err}`, "bad"); }
@@ -3565,9 +3883,1410 @@ LOS.watch($("fs-cwrap"), drawCurve);
 })();
 </script>
 <script>
+// ==========================================================
+// TP SPECTRUM VIEWER  (TP_plotter.py): noise threshold, E_max detection, thesis-width figure
+// ==========================================================
 (() => {
 "use strict";
-const NAMES = { home: "", tp: "Thomson Parabola Simulator", bcal: "TP B-field Calibration", radiography: "Proton Radiography",
+const { $, pyG } = LOS;
+
+// ---------- analysis (identical maths to TP_plotter.py / TP_batch_plotter.py) ----------
+const D = { sigma_spec: 1.0, noise_width: 2.0, n_sigma: 2.0, min_above: 2.0 };
+const COL_E = 0, COL_SPEC = 4, COL_BKG = 5;
+const ELEMENTS = { 1: "H", 2: "D", 3: "T", 4: "He", 7: "Li", 9: "Be", 11: "B", 12: "C", 14: "N", 16: "O", 19: "F", 20: "Ne", 27: "Al", 28: "Si", 40: "Ar", 197: "Au" };
+const ELEMENT_NAMES = { H: "Proton", D: "Deuteron", T: "Triton", He: "Helium", C: "Carbon", N: "Nitrogen", O: "Oxygen" };
+const FNAME_RE = /(shot\d+)_ions_(\d+)deg_(scan\d+)_(\d+)(_PS)?_.*?(TP[A-Za-z0-9]+)_M(\d+)_Z(\d+)\.txt$/;
+const SPECIES_RE = /_M(\d+)_Z(\d+)\.txt$/;
+function parseName(name) {
+  const sp = SPECIES_RE.exec(name);
+  if (!sp) throw new Error(`No species token (_M<mass>_Z<charge>.txt) in: ${name}`);
+  const M = parseInt(sp[1], 10), Z = parseInt(sp[2], 10), m = FNAME_RE.exec(name), sym = ELEMENTS[M] || `M${M}`, charge = Z === 1 ? "+" : `${Z}+`;
+  return { file: name, shot: m ? m[1] : "", angle: m ? parseInt(m[2], 10) : null, scan: m ? m[3] : "", ps: name.includes("_PS_"), tp: m ? m[6] : "TP?", M, Z,
+    sym, charge, speciesName: ELEMENT_NAMES[sym] || sym };
+}
+const pyFloat = t => { if (/^[+-]?inf(inity)?$/i.test(t)) return t[0] === "-" ? -Infinity : Infinity; if (/^[+-]?nan$/i.test(t)) return NaN; const v = Number(t); if (t === "" || Number.isNaN(v)) throw new Error(`could not convert '${t}' to float`); return v; };
+function loadSpectrum(text) {   // np.loadtxt(path, comments="(", ndmin=2), sorted by energy
+  const rows = [];
+  for (let line of text.split(/\r\n|\r|\n/)) {
+    const k = line.indexOf("("); if (k >= 0) line = line.slice(0, k);
+    line = line.trim(); if (!line) continue;
+    const r = line.split(/\s+/).map(pyFloat);
+    if (rows.length && r.length !== rows[0].length) throw new Error(`Wrong number of columns at row ${rows.length + 1}`);
+    rows.push(r);
+  }
+  if (!rows.length) return { e: new Float64Array(0), s: new Float64Array(0), b: null };
+  if (rows[0].length <= COL_SPEC) throw new Error(`Needs at least ${COL_SPEC + 1} columns (dN/dE/dΩ is column ${COL_SPEC + 1})`);
+  rows.sort((a, b) => (Number.isNaN(a[COL_E]) ? 1 : Number.isNaN(b[COL_E]) ? -1 : a[COL_E] - b[COL_E]));
+  return { e: Float64Array.from(rows, r => r[COL_E]), s: Float64Array.from(rows, r => r[COL_SPEC]), b: rows[0].length > COL_BKG ? Float64Array.from(rows, r => r[COL_BKG]) : null };
+}
+function smooth(y, sigma) {   // Gaussian in points, edge padded
+  if (sigma <= 0) return Float64Array.from(y);
+  const r = Math.trunc(4.0 * sigma + 0.5), k = [];
+  let s = 0; for (let x = -r; x <= r; x++) { const v = Math.exp(-0.5 * (x / sigma) ** 2); k.push(v); s += v; }
+  for (let i = 0; i < k.length; i++) k[i] /= s;
+  const n = y.length, out = new Float64Array(n);
+  for (let j = 0; j < n; j++) { let a = 0; for (let t = 0; t < k.length; t++) a += k[t] * y[Math.min(n - 1, Math.max(0, j + r - t))]; out[j] = a; }
+  return out;
+}
+function wma(x, y, width, truncate = 4.0) {   // Gaussian-weighted moving average, window fixed in x
+  if (width <= 0) return Float64Array.from(y);
+  const n = x.length, out = new Float64Array(n);
+  for (let i = 0; i < n; i++) {
+    let s = 0, sw = 0;
+    for (let j = 0; j < n; j++) { const d = x[j] - x[i]; if (Math.abs(d) > truncate * width) continue; const w = Math.exp(-0.5 * (d / width) ** 2); s += w * y[j]; sw += w; }
+    out[i] = s / sw;
+  }
+  return out;
+}
+function gradient(e) { const n = e.length, g = new Float64Array(n); if (n < 2) return g; g[0] = e[1] - e[0]; g[n - 1] = e[n - 1] - e[n - 2]; for (let i = 1; i < n - 1; i++) g[i] = (e[i + 1] - e[i - 1]) / 2; return g; }
+function lstsq(A, b) {   // Householder QR, A: n×p (array of rows)
+  const n = A.length, p = A[0].length, Q = A.map(r => r.slice()), y = b.slice();
+  for (let k = 0; k < p; k++) {
+    let norm = 0; for (let i = k; i < n; i++) norm += Q[i][k] ** 2; norm = Math.sqrt(norm);
+    if (norm === 0) continue;
+    const alpha = Q[k][k] > 0 ? -norm : norm, v = new Float64Array(n);
+    for (let i = k; i < n; i++) v[i] = Q[i][k]; v[k] -= alpha;
+    let vv = 0; for (let i = k; i < n; i++) vv += v[i] * v[i];
+    if (vv === 0) continue;
+    for (let j = k; j < p; j++) { let d = 0; for (let i = k; i < n; i++) d += v[i] * Q[i][j]; d = 2 * d / vv; for (let i = k; i < n; i++) Q[i][j] -= d * v[i]; }
+    let d = 0; for (let i = k; i < n; i++) d += v[i] * y[i]; d = 2 * d / vv; for (let i = k; i < n; i++) y[i] -= d * v[i];
+  }
+  const c = new Float64Array(p);
+  for (let k = p - 1; k >= 0; k--) { let s = y[k]; for (let j = k + 1; j < p; j++) s -= Q[k][j] * c[j]; c[k] = s / Q[k][k]; }
+  return c;
+}
+function fitThreshold(e, thr, deg = 2) {   // np.polyfit(log10 E, log10 thr, 2, w=sqrt(gradient(E)))
+  const g = gradient(e), xs = [], ys = [], ws = [];
+  for (let i = 0; i < e.length; i++) if (Number.isFinite(thr[i]) && thr[i] > 0 && e[i] > 0) { xs.push(Math.log10(e[i])); ys.push(Math.log10(thr[i])); ws.push(Math.sqrt(g[i])); }
+  if (xs.length < deg + 2) return null;
+  const A = xs.map((x, i) => { const r = []; for (let d = deg; d >= 0; d--) r.push(x ** d * ws[i]); return r; });
+  const scale = []; for (let j = 0; j <= deg; j++) { let s = 0; for (const r of A) s += r[j] * r[j]; scale.push(Math.sqrt(s) || 1); }
+  for (const r of A) for (let j = 0; j <= deg; j++) r[j] /= scale[j];
+  const c = lstsq(A, ys.map((y, i) => y * ws[i])).map((v, j) => v / scale[j]);
+  return Float64Array.from(e, x => { const lx = Math.log10(x); let y = 0; for (const ci of c) y = y * lx + ci; return 10 ** y; });
+}
+function crossing(e, sig, thr, i) {
+  const r0 = Math.log10(Math.max(sig[i], 1e-300)) - Math.log10(thr[i]);
+  const s1 = sig[i + 1] > 0 ? sig[i + 1] : thr[i + 1] * 1e-3;
+  const r1 = Math.log10(s1) - Math.log10(thr[i + 1]);
+  const f = r0 !== r1 ? r0 / (r0 - r1) : 0.0;
+  return e[i] + Math.min(1, Math.max(0, f)) * (e[i + 1] - e[i]);
+}
+function findEmax(e, sig, thr, minAbove) {   // highest-energy crossing; narrow stretches don't count unless they hold the peak
+  const above = []; for (let i = 0; i < e.length; i++) if (sig[i] > thr[i]) above.push(i);
+  if (!above.length) return [null, false];
+  const runs = [[above[0]]];
+  for (let k = 1; k < above.length; k++) { if (above[k] - above[k - 1] > 1) runs.push([]); runs[runs.length - 1].push(above[k]); }
+  let iPeak = 0; for (let i = 0; i < sig.length; i++) { if (Number.isNaN(sig[i])) { iPeak = i; break; } if (sig[i] > sig[iPeak]) iPeak = i; }
+  const good = runs.filter(r => e[r[r.length - 1]] - e[r[0]] >= minAbove || (r[0] <= iPeak && iPeak <= r[r.length - 1]));
+  if (!good.length) return [null, false];
+  const g = good[good.length - 1], i = g[g.length - 1];
+  if (i === e.length - 1) return [e[e.length - 1], true];
+  return [crossing(e, sig, thr, i), false];
+}
+function analyse(e, specRaw, bkg, o) {
+  const out = { e, spec: smooth(specRaw, o.sigma_spec), noise: bkg, threshold: null, e_max: null, at_edge: false, mode: o.mode };
+  if (!bkg || e.length < 4) return out;
+  const mean = wma(e, bkg, o.noise_width);
+  const sigma = wma(e, Float64Array.from(bkg, (b, i) => (b - mean[i]) ** 2), o.noise_width).map(Math.sqrt);
+  let thr = Float64Array.from(mean, (mu, i) => mu + o.n_sigma * sigma[i]);
+  if (o.mode === "fit") { const f = fitThreshold(e, thr); if (f) thr = f; else out.mode = "moving (fit failed)"; }
+  out.threshold = thr;
+  [out.e_max, out.at_edge] = findEmax(e, out.spec, thr, o.min_above);
+  return out;
+}
+function niceLimits(res) {
+  const e = res.e;
+  const emax = Math.max(...e), xmax = 10 * Math.ceil(emax * 1.05 / 10);
+  const pos = [...res.spec].filter(v => v > 0);
+  const peak = pos.length ? Math.max(...[...res.spec].filter(v => !Number.isNaN(v))) : 1e10;
+  let low;
+  const tp = res.threshold ? [...res.threshold].filter(v => v > 0) : [];
+  if (tp.length) low = Math.min(...tp); else low = pos.length ? Math.min(...pos) : peak / 1e3;
+  let ylo = 10 ** Math.floor(Math.log10(low));
+  if (low / ylo < 2) ylo /= 10;
+  const yhi = 10 ** Math.ceil(Math.log10(peak));
+  if (yhi / ylo < 1e2) ylo = yhi / 1e2;
+  return [[0.0, xmax], [ylo, yhi * 10]];
+}
+const interp = (x, xp, fp) => {   // np.interp
+  const n = xp.length; if (x <= xp[0]) return fp[0]; if (x >= xp[n - 1]) return fp[n - 1];
+  let lo = 0, hi = n - 1; while (hi - lo > 1) { const mid = (lo + hi) >> 1; if (xp[mid] <= x) lo = mid; else hi = mid; }
+  return fp[lo] + (fp[hi] - fp[lo]) * (x - xp[lo]) / (xp[hi] - xp[lo]);
+};
+
+// ---------- figure: one renderer, drawn on a canvas (screen, PNG) or into a PDF ----------
+// text is a list of runs: { t, it (italic), sup, sub }
+const SERIF = `"Times New Roman", Times, "Nimbus Roman", "Liberation Serif", serif`;
+const mctx = document.createElement("canvas").getContext("2d");
+const runSize = (r, size) => (r.sup || r.sub ? size * 0.7 : size);
+const measureRuns = (runs, size, fam) => runs.reduce((w, r) => { mctx.font = `${r.it ? "italic " : ""}${runSize(r, size)}px ${fam}`; return w + mctx.measureText(r.t).width; }, 0);
+function canvasBackend(ctx, fam) {
+  return {
+    fam,
+    rect(x, y, w, h, col) { ctx.fillStyle = col; ctx.fillRect(x, y, w, h); },
+    line(xs, ys, o) {
+      ctx.save(); ctx.strokeStyle = o.col; ctx.lineWidth = o.w; ctx.setLineDash(o.dash || []); ctx.lineJoin = "round"; ctx.lineCap = "butt"; ctx.beginPath();
+      let pen = false;
+      for (let i = 0; i < xs.length; i++) { if (!Number.isFinite(xs[i]) || !Number.isFinite(ys[i])) { pen = false; continue; } if (pen) ctx.lineTo(xs[i], ys[i]); else { ctx.moveTo(xs[i], ys[i]); pen = true; } }
+      ctx.stroke(); ctx.restore();
+    },
+    circle(x, y, r, o) { ctx.beginPath(); ctx.arc(x, y, r, 0, Math.PI * 2); ctx.fillStyle = o.fill; ctx.fill(); ctx.strokeStyle = o.stroke; ctx.lineWidth = o.w; ctx.setLineDash([]); ctx.stroke(); },
+    measure: (runs, size) => measureRuns(runs, size, fam),
+    text(runs, x, y, o) {
+      const size = o.size, w = measureRuns(runs, size, fam);
+      ctx.save(); ctx.translate(x, y); if (o.rot) ctx.rotate(o.rot);
+      let cx = o.align === "center" ? -w / 2 : o.align === "right" ? -w : 0;
+      const by = o.base === "top" ? size * 0.76 : o.base === "middle" ? size * 0.34 : o.base === "bottom" ? -size * 0.24 : 0;
+      ctx.fillStyle = o.col; ctx.textBaseline = "alphabetic"; ctx.textAlign = "left";
+      for (const r of runs) {
+        const sz = runSize(r, size); ctx.font = `${r.it ? "italic " : ""}${sz}px ${fam}`;
+        ctx.fillText(r.t, cx, by + (r.sup ? -size * 0.38 : r.sub ? size * 0.2 : 0)); cx += ctx.measureText(r.t).width;
+      }
+      ctx.restore();
+    },
+    clip(x, y, w, h) { ctx.save(); ctx.beginPath(); ctx.rect(x, y, w, h); ctx.clip(); },
+    unclip() { ctx.restore(); },
+  };
+}
+// Minimal one-page PDF: lines, circles and text in the standard Times and Symbol fonts
+function pdfBackend(W, H) {
+  const ops = [], f = v => { const s = (Math.round(v * 1000) / 1000).toFixed(3).replace(/\.?0+$/, ""); return s === "-0" ? "0" : s; };
+  const rgb = hex => { const h = hex.replace("#", ""), n = parseInt(h.length === 3 ? h.split("").map(c => c + c).join("") : h, 16); return [(n >> 16) & 255, (n >> 8) & 255, n & 255].map(c => f(c / 255)).join(" "); };
+  const SYM = { "Ω": "W", "σ": "s", "−": "-", "Δ": "D", "μ": "m" };
+  const WIN = { "µ": "\\265", "°": "\\260", "–": "\\226", "×": "\\327", "²": "\\262", "³": "\\263", "¹": "\\271" };
+  const esc = (s, sym) => [...s].map(ch => (sym ? SYM[ch] || ch : ch)).map(ch => (ch === "\\" || ch === "(" || ch === ")" ? "\\" + ch : WIN[ch] || (ch.charCodeAt(0) < 127 ? ch : "?"))).join("");
+  const split = runs => runs.flatMap(r => { const out = []; let cur = null; for (const ch of r.t) { const sym = ch in SYM; if (!cur || cur.sym !== sym) { cur = { ...r, t: "", sym }; out.push(cur); } cur.t += ch; } return out; });
+  return {
+    fam: SERIF, ops,
+    rect(x, y, w, h, col) { ops.push(`${rgb(col)} rg ${f(x)} ${f(H - y - h)} ${f(w)} ${f(h)} re f`); },
+    line(xs, ys, o) {
+      const seg = []; let pen = false;
+      for (let i = 0; i < xs.length; i++) { if (!Number.isFinite(xs[i]) || !Number.isFinite(ys[i])) { pen = false; continue; } seg.push(`${f(xs[i])} ${f(H - ys[i])} ${pen ? "l" : "m"}`); pen = true; }
+      if (seg.length) ops.push(`q ${f(o.w)} w [${(o.dash || []).map(f).join(" ")}] 0 d 0 J 1 j ${rgb(o.col)} RG`, ...seg, "S Q");
+    },
+    circle(x, y, r, o) {
+      const k = 0.5523 * r, Y = H - y;
+      ops.push(`q ${f(o.w)} w [] 0 d ${rgb(o.stroke)} RG ${rgb(o.fill)} rg ${f(x + r)} ${f(Y)} m`,
+        `${f(x + r)} ${f(Y + k)} ${f(x + k)} ${f(Y + r)} ${f(x)} ${f(Y + r)} c`, `${f(x - k)} ${f(Y + r)} ${f(x - r)} ${f(Y + k)} ${f(x - r)} ${f(Y)} c`,
+        `${f(x - r)} ${f(Y - k)} ${f(x - k)} ${f(Y - r)} ${f(x)} ${f(Y - r)} c`, `${f(x + k)} ${f(Y - r)} ${f(x + r)} ${f(Y - k)} ${f(x + r)} ${f(Y)} c B Q`);
+    },
+    measure: (runs, size) => measureRuns(runs, size, SERIF),
+    text(runs, x, y, o) {
+      const size = o.size, w = measureRuns(runs, size, SERIF), a = -(o.rot || 0), c = Math.cos(a), s = Math.sin(a);
+      let lx = o.align === "center" ? -w / 2 : o.align === "right" ? -w : 0;
+      const by = o.base === "top" ? size * 0.76 : o.base === "middle" ? size * 0.34 : o.base === "bottom" ? -size * 0.24 : 0;
+      ops.push(`BT ${rgb(o.col)} rg`);
+      for (const r of split(runs)) {
+        const sz = runSize(r, size), ly = -(by + (r.sup ? -size * 0.38 : r.sub ? size * 0.2 : 0));   // PDF y is up
+        const tx = x + lx * c - ly * s, ty = (H - y) + lx * s + ly * c;
+        ops.push(`/${r.sym ? "F3" : r.it ? "F2" : "F1"} ${f(sz)} Tf ${f(c)} ${f(s)} ${f(-s)} ${f(c)} ${f(tx)} ${f(ty)} Tm (${esc(r.t, r.sym)}) Tj`);
+        lx += measureRuns([r], size, SERIF);
+      }
+      ops.push("ET");
+    },
+    clip(x, y, w, h) { ops.push(`q ${f(x)} ${f(H - y - h)} ${f(w)} ${f(h)} re W n`); },
+    unclip() { ops.push("Q"); },
+    build() {
+      const content = ops.join("\n");
+      const objs = ["<< /Type /Catalog /Pages 2 0 R >>", "<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
+        `<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${f(W)} ${f(H)}] /Resources << /Font << /F1 5 0 R /F2 6 0 R /F3 7 0 R >> >> /Contents 4 0 R >>`,
+        `<< /Length ${content.length} >>\nstream\n${content}\nendstream`,
+        "<< /Type /Font /Subtype /Type1 /BaseFont /Times-Roman /Encoding /WinAnsiEncoding >>",
+        "<< /Type /Font /Subtype /Type1 /BaseFont /Times-Italic /Encoding /WinAnsiEncoding >>",
+        "<< /Type /Font /Subtype /Type1 /BaseFont /Symbol >>"];
+      let out = "%PDF-1.4\n%\xE2\xE3\xCF\xD3\n"; const offs = [];
+      objs.forEach((o, i) => { offs.push(out.length); out += `${i + 1} 0 obj\n${o}\nendobj\n`; });
+      const xref = out.length;
+      out += `xref\n0 ${objs.length + 1}\n0000000000 65535 f \n` + offs.map(o => `${String(o).padStart(10, "0")} 00000 n \n`).join("");
+      out += `trailer\n<< /Size ${objs.length + 1} /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF\n`;
+      return Uint8Array.from(out, ch => ch.charCodeAt(0) & 255);
+    },
+  };
+}
+const R = t => ({ t });
+const speciesRuns = meta => [R(meta.sym), { t: meta.charge, sup: true }];
+function emaxRuns(emax, edge) { return emax === null || emax === undefined ? [{ t: "E", it: true }, { t: "max", sub: true }, R(": n/a")] : [{ t: "E", it: true }, { t: "max", sub: true }, R(` = ${emax.toFixed(1)} MeV/u${edge ? " (edge)" : ""}`)]; }
+// sty: { fg, bg, muted, fam, size, lw } in the backend's units
+function drawFigure(B, W, H, sty, d) {
+  const { res, meta } = d, fs = sty.size, k = sty.lw;
+  B.rect(0, 0, W, H, sty.bg);
+  const [xl0, xl1] = d.xlim, [yl0, yl1] = d.ylim, L0 = Math.log10(yl0), L1 = Math.log10(yl1);
+  const lt = LOS.logTicks(L0, L1, 10);
+  const decLabel = v => { const e = Math.round(Math.log10(v)); return [R("10"), { t: String(e).replace("-", "−"), sup: true }]; };
+  const yLabW = Math.max(fs * 1.4, ...lt.major.filter(t => t.label && !t.label.includes("×")).map(t => B.measure(decLabel(t.v), fs)));
+  const m = { l: fs * 1.2 + 10 + yLabW + 6, r: fs * 0.8, t: fs * 0.7, b: fs * 2.6 + 6 };
+  const pw = W - m.l - m.r, ph = H - m.t - m.b;
+  const X = v => m.l + (v - xl0) / (xl1 - xl0) * pw, Y = v => m.t + ph - (Math.log10(v) - L0) / (L1 - L0) * ph;
+  const e = res.e;
+  B.clip(m.l, m.t, pw, ph);
+  if (d.vline && d.emax !== null && d.emax !== undefined) B.line([X(d.emax), X(d.emax)], [m.t, m.t + ph], { col: sty.muted, w: 1.0 * k, dash: [6.4 * k, 1.6 * k, 1 * k, 1.6 * k] });
+  const ex = [...e].map(X);
+  B.line(ex, [...res.spec].map(v => (v > 0 ? Y(v) : NaN)), { col: sty.fg, w: 1.6 * k });
+  if (res.noise) B.line(ex, [...res.noise].map(v => (v > 0 ? Y(v) : NaN)), { col: sty.fg, w: 0.5 * k });
+  if (res.threshold) B.line(ex, [...res.threshold].map(v => (v > 0 ? Y(v) : NaN)), { col: sty.fg, w: 1.6 * k, dash: [1 * 1.6 * k, 1.2 * 1.6 * k] });
+  if (d.emax !== null && d.emax !== undefined && res.threshold && !d.edge) {
+    const ty = interp(d.emax, e, res.threshold);
+    if (ty > 0) B.circle(X(d.emax), Y(ty), 2.5 * k, { fill: sty.bg, stroke: sty.fg, w: 1.0 * k });
+  }
+  B.unclip();
+  // frame and inward ticks on all four sides
+  B.line([m.l, m.l + pw, m.l + pw, m.l, m.l], [m.t, m.t, m.t + ph, m.t + ph, m.t], { col: sty.fg, w: 0.8 * k });
+  const nx = Math.max(3, Math.round(pw / (fs * 5.2))), xt = LOS.ticks(xl0, xl1, nx), xs = LOS.niceStep(xl1 - xl0, nx);
+  const mant = Math.round(xs / 10 ** Math.floor(Math.log10(xs) + 1e-9)), xminor = xs / ([1, 5, 10].includes(mant) ? 5 : 4);
+  const tick = (x0, y0, x1, y1, w) => B.line([x0, x1], [y0, y1], { col: sty.fg, w });
+  for (let v = Math.ceil(xl0 / xminor - 1e-9) * xminor; v <= xl1 + 1e-9; v += xminor) { const x = X(v); tick(x, m.t + ph, x, m.t + ph - 2 * k, 0.6 * k); tick(x, m.t, x, m.t + 2 * k, 0.6 * k); }
+  for (const t of xt) { const x = X(t); tick(x, m.t + ph, x, m.t + ph - 4 * k, 0.8 * k); tick(x, m.t, x, m.t + 4 * k, 0.8 * k); B.text([R(LOS.tickFmt(t, xs))], x, m.t + ph + 3.5 * k, { size: fs, align: "center", base: "top", col: sty.fg }); }
+  for (const v of lt.minor) { const y = Y(v); tick(m.l, y, m.l + 2 * k, y, 0.6 * k); tick(m.l + pw, y, m.l + pw - 2 * k, y, 0.6 * k); }
+  for (const t of lt.major) {
+    const y = Y(t.v), dec = Math.abs(Math.log10(t.v) - Math.round(Math.log10(t.v))) < 1e-9;
+    tick(m.l, y, m.l + (dec ? 4 : 2) * k, y, (dec ? 0.8 : 0.6) * k); tick(m.l + pw, y, m.l + pw - (dec ? 4 : 2) * k, y, (dec ? 0.8 : 0.6) * k);
+    if (t.label && dec) B.text(decLabel(t.v), m.l - 3.5 * k, y, { size: fs, align: "right", base: "middle", col: sty.fg });
+  }
+  B.text([R("Ion energy (MeV/u)")], m.l + pw / 2, H - 3 * k, { size: fs, align: "center", base: "bottom", col: sty.fg });
+  B.text([R("d"), { t: "N", it: true }, R("/d"), { t: "E", it: true }, R(" dΩ  ((MeV/u)"), { t: "−1", sup: true }, R(" sr"), { t: "−1", sup: true }, R(")")],
+    fs * 0.75 + 2, m.t + ph / 2, { size: fs, align: "center", base: "middle", rot: -Math.PI / 2, col: sty.fg });
+  // legend, upper right, no frame
+  const lf = fs - 1, items = [{ runs: speciesRuns(meta), w: 1.6, dash: null }];
+  if (res.noise) items.push({ runs: [R("Noise")], w: 0.5, dash: null });
+  if (res.threshold) items.push({ runs: [...speciesRuns(meta), R(` Noise +${pyG(d.nSigma)}σ`)], w: 1.6, dash: [1.6 * k, 1.92 * k] });
+  const tw = Math.max(...items.map(it => B.measure(it.runs, lf))), hl = 2.4 * lf, gap = 0.8 * lf;
+  const lx = m.l + pw - 0.6 * lf - 0.4 * lf - tw - gap - hl, ly0 = m.t + 0.6 * lf + 0.4 * lf;
+  items.forEach((it, i) => {
+    const yc = ly0 + i * lf * 1.5 + lf * 0.5;
+    B.line([lx, lx + hl], [yc, yc], { col: sty.fg, w: it.w * k, dash: it.dash });
+    B.text(it.runs, lx + hl + gap, yc, { size: lf, align: "left", base: "middle", col: sty.fg });
+  });
+  // info block at axes (0.40, 0.95); moved below the legend only if the plot is too narrow for both
+  const angle = meta.angle !== null ? `${meta.angle}°` : "";
+  const lines = [...[meta.shot, `${meta.tp} ${angle}`.trim(), meta.scan].filter(Boolean).map(t => [R(t)]), emaxRuns(d.emax, d.edge)];
+  const ix = m.l + 0.40 * pw, iw = Math.max(...lines.map(r => B.measure(r, fs)));
+  const iy = ix + iw > lx - 6 ? ly0 + items.length * lf * 1.5 + lf * 0.6 : m.t + 0.05 * ph;
+  lines.forEach((runs, i) => B.text(runs, ix + iw > lx - 6 ? Math.min(ix, m.l + pw - iw - lf) : ix, iy + i * fs * 1.22, { size: fs, align: "left", base: "top", col: sty.fg }));
+  return { m, pw, ph, X, xinv: px => xl0 + (px - m.l) / pw * (xl1 - xl0) };
+}
+
+// ---------- state + controls ----------
+const SV = { files: [], path: null, meta: null, raw: null, res: null, emax: null, edge: false, lay: null, drag: false, sync: false };
+// QDoubleSpinBox-like fields: clamp to the range and round to the shown decimals
+function spin(id, o) {
+  const el = $(id); let lo = o.min, hi = o.max, val = o.value;
+  const rd = v => +(+v).toFixed(o.dec), norm = v => Math.min(rd(hi), Math.max(rd(lo), rd(v)));
+  const show = () => { el.value = val.toFixed(o.dec); el.setAttribute("aria-invalid", "false"); };
+  const f = { get value() { return val; }, set(v) { val = norm(v); show(); }, setRange(a, b) { lo = a; hi = b; val = norm(val); show(); }, listeners: [] };
+  el.addEventListener("input", () => { const t = el.value.trim(), v = Number(t); const ok = t !== "" && Number.isFinite(v); el.setAttribute("aria-invalid", ok ? "false" : "true"); if (ok) { val = norm(v); f.listeners.forEach(fn => fn(val)); } });
+  el.addEventListener("change", show);
+  show();
+  return f;
+}
+const fEmax = spin("sv-emax", { min: 0, max: 1000, value: 0, dec: 1 });
+const fWin = spin("sv-win", { min: 0.1, max: 50, value: D.noise_width, dec: 1 });
+const fNs = spin("sv-ns", { min: 0.5, max: 10, value: D.n_sigma, dec: 1 });
+const fMin = spin("sv-minw", { min: 0, max: 50, value: D.min_above, dec: 1 });
+const fSm = spin("sv-smooth", { min: 0, max: 20, value: D.sigma_spec, dec: 1 });
+const fMlo = spin("sv-mlo", { min: 0, max: 1000, value: 0, dec: 2 });
+const fMhi = spin("sv-mhi", { min: 0, max: 1000, value: 100, dec: 2 });
+const fX0 = spin("sv-x0", { min: 0, max: 1000, value: 0, dec: 1 });
+const fX1 = spin("sv-x1", { min: 0, max: 1000, value: 80, dec: 1 });
+const fY0 = spin("sv-y0", { min: 0, max: 20, value: 6, dec: 2 });
+const fY1 = spin("sv-y1", { min: 0, max: 20, value: 12, dec: 2 });
+const xlim = () => [fX0.value, fX1.value], ylim = () => [10 ** fY0.value, 10 ** fY1.value];
+let lims = null;   // limits in use (exact nice limits after an auto-fit, else the fields)
+const enable = on => { for (const id of ["sv-emax", "sv-reset", "sv-win", "sv-ns", "sv-minw", "sv-smooth", "sv-mode", "sv-mlo", "sv-mhi", "sv-x0", "sv-x1", "sv-y0", "sv-y1", "sv-fit", "sv-png", "sv-pdf", "sv-prev", "sv-next"]) $(id).disabled = !on; };
+
+function listFolder(path) {   // other spectra loaded with this one (PS files only if this one is PS)
+  let files = SV.files.filter(f => SPECIES_RE.test(f.name));
+  if (path.includes("_PS_")) files = files.filter(f => f.name.includes("_PS_"));
+  return files.sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0));
+}
+function show(file) {
+  let meta, raw;
+  try { meta = parseName(file.name); raw = loadSpectrum(file.text); }
+  catch (err) { $("sv-name").textContent = `Could not load: ${err.message}`; return; }
+  if (!raw.e.length) { $("sv-name").textContent = "Spectrum file contains no data rows."; return; }
+  SV.path = file.name; SV.meta = meta; SV.raw = raw;
+  const folder = listFolder(file.name), pos = folder.findIndex(f => f.name === file.name);
+  $("sv-name").innerHTML = `${LOS.esc(meta.file)}   —   ${meta.speciesName} (${meta.sym}<sup>${meta.charge}</sup>), ${LOS.esc(meta.tp)}   ${pos >= 0 ? `${pos + 1}/${folder.length}` : ""}` + (raw.b ? "" : "   —   no noise column in this file");
+  let lo = Infinity, hi = -Infinity; for (const v of raw.e) { if (v < lo) lo = v; if (v > hi) hi = v; }
+  SV.sync = true; fMlo.setRange(lo, hi); fMhi.setRange(lo, hi); fMlo.set(lo); fMhi.set(hi); SV.sync = false;
+  enable(true);
+  recompute(true);
+}
+function recompute(autofit) {
+  if (!SV.raw || SV.sync) return;
+  const { e, s, b } = SV.raw, keep = [];
+  for (let i = 0; i < e.length; i++) if (e[i] >= fMlo.value && e[i] <= fMhi.value) keep.push(i);
+  if (keep.length < 4) { $("sv-name").textContent = "Mask leaves too few points."; return; }
+  const pick = a => Float64Array.from(keep, i => a[i]);
+  try { SV.res = analyse(pick(e), pick(s), b ? pick(b) : null, { sigma_spec: fSm.value, noise_width: fWin.value, n_sigma: fNs.value, min_above: fMin.value, mode: $("sv-mode").value }); }
+  catch (err) { $("sv-name").textContent = `Analysis failed: ${err.message}`; return; }
+  if (autofit) { const [xl, yl] = niceLimits(SV.res); setAxisFields(xl, yl); lims = { x: xl, y: yl }; }
+  else lims = { x: xlim(), y: ylim() };
+  SV.emax = SV.res.e_max; SV.edge = SV.res.at_edge;
+  const ee = SV.res.e;
+  SV.sync = true; fEmax.setRange(ee[0], ee[ee.length - 1]); if (SV.emax !== null) fEmax.set(SV.emax); SV.sync = false;
+  $("sv-emax").disabled = $("sv-reset").disabled = SV.emax === null;
+  results(); draw();
+}
+function setAxisFields(xl, yl) { SV.sync = true; fX0.set(xl[0]); fX1.set(xl[1]); fY0.set(Math.log10(yl[0])); fY1.set(Math.log10(yl[1])); SV.sync = false; }
+function results() {
+  const { meta, res } = SV, angle = meta.angle !== null ? `  ${meta.angle}°` : "";
+  $("sv-t-sp").innerHTML = `${meta.sym}<sup>${meta.charge}</sup>`;
+  $("sv-t-tp").textContent = `${meta.tp}${angle}`;
+  $("sv-t-auto").textContent = res.e_max === null ? "none above threshold" : `${res.e_max.toFixed(1)} MeV/u`;
+  $("sv-t-lo").textContent = `${res.e[0].toFixed(1)} MeV/u`;
+  $("sv-t-end").textContent = `${res.e[res.e.length - 1].toFixed(1)} MeV/u`;
+  const w = $("sv-warn");
+  w.textContent = res.at_edge ? "Signal is still above the threshold at the end of the data: E_max is a lower limit." : res.mode.startsWith("moving (fit") ? "Threshold fit failed; using the moving curve." : "";
+  w.classList.toggle("hidden", !w.textContent);
+}
+function screenStyle() { const T = LOS.theme; return { fg: T.curve, bg: T.card, muted: T.sub, size: 12.5, lw: 1.25 }; }
+function draw() {
+  const cv = $("sv-plot"); if (!cv.clientWidth) return;
+  const { ctx, w, h } = LOS.fitCanvas(cv), T = LOS.theme;
+  if (!SV.res) {
+    ctx.fillStyle = T.card; ctx.fillRect(0, 0, w, h); ctx.fillStyle = T.sub; ctx.font = `13px ${T.body}`; ctx.textAlign = "center";
+    ctx.fillText("Load or drop a Thomson-parabola spectrum (.txt)", w / 2, h / 2); return;
+  }
+  SV.lay = drawFigure(canvasBackend(ctx, T.body), w, h, screenStyle(), { res: SV.res, meta: SV.meta, nSigma: fNs.value, xlim: lims.x, ylim: lims.y, emax: SV.emax, edge: SV.edge, vline: SV.emax !== null });
+}
+function setEmax(v, edge = false) {
+  if (!SV.res || SV.emax === null) return;
+  const e = SV.res.e;
+  SV.emax = Math.min(Math.max(v, e[0]), e[e.length - 1]); SV.edge = edge; draw();
+}
+function figureData() {
+  const edge = SV.res.at_edge && SV.emax !== null && Math.abs(SV.emax - (SV.res.e_max || 0)) < 1e-9;
+  return { res: SV.res, meta: SV.meta, nSigma: fNs.value, xlim: lims.x, ylim: lims.y, emax: SV.emax, edge, vline: false };
+}
+const FIG_W = 453.0, FIG_H = 453.0 * 0.62, PRINT = { fg: "#000000", bg: "#FFFFFF", muted: "#737373", size: 11, lw: 1 };
+const stemOf = () => (SV.path || "spectrum").replace(/\.[^.]*$/, "");
+$("sv-png").addEventListener("click", () => {   // 453 pt wide at 300 dpi
+  if (!SV.res) return;
+  const sc = 300 / 72, c = document.createElement("canvas"); c.width = Math.round(FIG_W * sc); c.height = Math.round(FIG_H * sc);
+  const ctx = c.getContext("2d"); ctx.scale(sc, sc);
+  drawFigure(canvasBackend(ctx, SERIF), FIG_W, FIG_H, PRINT, figureData());
+  LOS.saveCanvas(c, `${stemOf()}.png`);
+});
+$("sv-pdf").addEventListener("click", () => {
+  if (!SV.res) return;
+  const B = pdfBackend(FIG_W, FIG_H); drawFigure(B, FIG_W, FIG_H, PRINT, figureData());
+  LOS.save(`${stemOf()}.pdf`, new Blob([B.build()], { type: "application/pdf" }), "Figure saved.");
+});
+
+// E_max: drag the dash-dot line, or type it
+const cv = $("sv-plot");
+cv.addEventListener("pointerdown", ev => {
+  if (!SV.lay || SV.emax === null) return;
+  const b = cv.getBoundingClientRect(), x = ev.clientX - b.left;
+  if (Math.abs(x - SV.lay.X(SV.emax)) <= 8) { SV.drag = true; cv.setPointerCapture(ev.pointerId); cv.classList.add("grabbing"); ev.preventDefault(); }
+});
+cv.addEventListener("pointermove", ev => {
+  const b = cv.getBoundingClientRect(), x = ev.clientX - b.left, y = ev.clientY - b.top, L = SV.lay;
+  if (L && SV.emax !== null) cv.classList.toggle("ew", SV.drag || Math.abs(x - L.X(SV.emax)) <= 8);
+  if (!SV.drag || !L) return;
+  if (x < L.m.l || x > L.m.l + L.pw || y < L.m.t || y > L.m.t + L.ph) return;
+  setEmax(L.xinv(x));
+  SV.sync = true; fEmax.set(Math.round(SV.emax * 10) / 10); SV.sync = false;
+});
+const drop = () => { SV.drag = false; cv.classList.remove("grabbing"); };
+cv.addEventListener("pointerup", drop); cv.addEventListener("pointercancel", drop);
+fEmax.listeners.push(v => { if (!SV.sync) setEmax(v); });
+$("sv-reset").addEventListener("click", () => { if (!SV.res || SV.res.e_max === null) return; SV.sync = true; fEmax.set(SV.res.e_max); SV.sync = false; setEmax(SV.res.e_max, SV.res.at_edge); });
+for (const f of [fWin, fNs, fMin, fSm, fMlo, fMhi]) f.listeners.push(() => { if (!SV.sync) recompute(false); });
+$("sv-mode").addEventListener("change", () => recompute(false));
+for (const f of [fX0, fX1, fY0, fY1]) f.listeners.push(() => { if (!SV.sync && SV.res) { lims = { x: xlim(), y: ylim() }; draw(); } });
+$("sv-fit").addEventListener("click", () => { if (!SV.res) return; const [xl, yl] = niceLimits(SV.res); setAxisFields(xl, yl); lims = { x: xl, y: yl }; draw(); });
+
+// files: pick several to step through them; TP Analysis can hand its spectra over directly
+function openFiles(list, which) {
+  SV.files = list;
+  const first = which ? list.find(f => f.name === which) : listFolder(list[0].name)[0] || list[0];
+  show(first);
+}
+function step(d) {
+  if (!SV.path) return;
+  const folder = listFolder(SV.path); if (!folder.length) return;
+  let i = folder.findIndex(f => f.name === SV.path); if (i < 0) i = d > 0 ? -1 : 0;
+  show(folder[(i + d + folder.length) % folder.length]);
+}
+$("sv-prev").addEventListener("click", () => step(-1));
+$("sv-next").addEventListener("click", () => step(+1));
+document.addEventListener("keydown", ev => { if ($("view-tpview").hidden || !(ev.ctrlKey || ev.metaKey)) return; if (ev.key === "ArrowLeft") { step(-1); ev.preventDefault(); } if (ev.key === "ArrowRight") { step(+1); ev.preventDefault(); } });
+async function readFiles(fileList) {
+  const files = [...fileList].filter(f => /\.txt$/i.test(f.name));
+  if (!files.length) { LOS.toast("Use the .txt spectra written by TP Analysis.", "warn"); return; }
+  openFiles(await Promise.all(files.map(async f => ({ name: f.name, text: await f.text() }))));
+}
+$("sv-load").addEventListener("click", () => $("sv-file").click());
+$("sv-file").addEventListener("change", ev => { const fl = ev.target.files; if (fl && fl.length) readFiles(fl); ev.target.value = ""; });
+const view = $("view-tpview");
+view.addEventListener("dragover", ev => { ev.preventDefault(); view.classList.add("drop-on"); });
+view.addEventListener("dragleave", ev => { if (!view.contains(ev.relatedTarget)) view.classList.remove("drop-on"); });
+view.addEventListener("drop", ev => { ev.preventDefault(); view.classList.remove("drop-on"); if (ev.dataTransfer.files && ev.dataTransfer.files.length) readFiles(ev.dataTransfer.files); });
+LOS.watch($("sv-wrap"), draw);
+enable(false);
+
+window.TPV_API = { open: (list, which) => openFiles(list, which), analyse, niceLimits, loadSpectrum, parseName, state: () => SV, pdf: () => { const B = pdfBackend(FIG_W, FIG_H); drawFigure(B, FIG_W, FIG_H, PRINT, figureData()); return B.build(); } };
+})();
+</script>
+<script>
+// ==========================================================
+// TP SPECTRUM ANALYSER  (TPA_python: tpa_gui.py, tp_analysis.py, tp_physics.py, Filters/*.py)
+// Same maths, units and output files as the Python tool (QUB TPA.m lineage).
+// ==========================================================
+(() => {
+"use strict";
+const { $, pyG, pyRound } = LOS;
+const SETTINGS = {"Apollon2025_TP39":"TP0\nB_input\t\t0\nB_Width\t\t50\nE_input\t\t75\nE_Width\t\t300\nDetector\t1080\nB_field\t\t0.6\nSolid_angle\t750\nResolution\t50\n","Apollon2025_TPlaser":"TP0\nB_input\t\t0\nB_Width\t\t50\nE_input\t\t75\nE_Width\t\t300\nDetector\t875\nB_field\t\t0.631892 \nSolid_angle\t997\nResolution\t50\n","Apollon2025_TPnormal":"TP0\nB_input\t\t0\nB_Width\t\t50\nE_input\t\t75\nE_Width\t\t300\nDetector\t1075\nB_field\t\t0.631391\nSolid_angle\t997\nResolution\t50\n","Apollon2026_kar_TPlaser":"TP0\nB_input\t\t0\nB_Width\t\t50\nE_input\t\t75\nE_Width\t\t300\nDetector\t875\nB_field\t\t0.631892 \nSolid_angle\t997\nResolution\t50\n","Apollon2026_kar_TPnormal":"TP0\nB_input\t\t0\nB_Width\t\t50\nE_input\t\t75\nE_Width\t\t300\nDetector\t1075\nB_field\t\t0.631391\nSolid_angle\t997\nResolution\t50\n","ELINP2024_TP20":"TP20\nB_input\t\t0\nB_Width\t\t71\nE_input\t\t92\nE_Width\t\t150\nDetector\t347\nB_field\t\t1\nSolid_angle\t3878\nResolution\t25\n","GEMINI2017_TP0-400um":"TP0\nB_input\t\t0\nB_Width\t\t50\nE_input\t\t70\nE_Width\t\t150\nDetector\t663\nB_field\t\t0.62\nSolid_angle\t32.7\nResolution\t100\n","GEMINI2017_TP4-100um":"B_input\t\t0\nB_Width\t\t50\nE_input\t\t70\nE_Width\t\t150\nDetector\t789\nB_field\t\t0.293\nSolid_angle\t30.6\nResolution\t52\n","GEMINI2017_TP9-100um":"TP5\nB_input\t\t0\nB_Width\t\t50\nE_input\t\t70\nE_Width\t\t150\nDetector\t803\nB_field\t\t0.58\nSolid_angle\t28.58\nResolution\t46.8\n","GEMINI2023Borghesi_Espec0":"B_input\t\t0\nB_Width\t\t50\nE_input\t\t0\nE_Width\t\t0\nDetector\t213\nB_field\t\t0.65\nSolid_angle\t3.45e-4\nResolution\t50\n","GEMINI2023_TP0":"TP0\nB_input\t\t0\nB_Width\t\t50\nE_input\t\t70\nE_Width\t\t150\nDetector\t663\nB_field\t\t0.62\nSolid_angle\t32.7\nResolution\t36\n","GEMINI2023_TP10":"TP5\nB_input\t\t0\nB_Width\t\t50\nE_input\t\t70\nE_Width\t\t150\nDetector\t803\nB_field\t\t0.625\nSolid_angle\t28.58\nResolution\t46.8\n","GEMINI2023_TP5":"TP5\nB_input\t\t0\nB_Width\t\t50\nE_input\t\t70\nE_Width\t\t150\nDetector\t803\nB_field\t\t0.58\nSolid_angle\t28.58\nResolution\t46.8\n","GEM_02_17_TP0-100um":"B_input\t\t0\nB_Width\t\t50\nE_input\t\t70\nE_Width\t\t200\nDetector\t605\nB_field\t\t1.03\nSolid_angle\t8.73\nResolution\t97\n","GEM_02_17_TP0-400um":"TP0\nB_input\t\t0\n\nB_Width\t\t50\n\nE_input\t\t68\n\nE_Width\t\t200\n\nDetector\t587.8\n\nB_field\t\t0.972\n\nSolid_angle\t118.29\n\nResolution\t100\n\n","GEM_02_17_TP4-100um":"B_input\t\t0\n\nB_Width\t\t50\n\nE_input\t\t70\n\nE_Width\t\t150\n\nDetector\t789\n\nB_field\t\t0.293\n\nSolid_angle\t30.6\n\nResolution\t52\n\n","GEM_02_17_TP9-100um":"B_input\t\t0\n\nB_Width\t\t50\n\nE_input\t\t70\n\nE_Width\t\t150\n\nDetector\t554.35\n\nB_field\t\t0.975\n\nSolid_angle\t28.58\n\nResolution\t100\n\n","GEM_05_2014_TP0-400um":"B_input\t\t0\nB_Width\t\t50\nE_input\t\t71\nE_Width\t\t150\nDetector\t457\nB_field\t\t0.93\nSolid_angle\t111.84\nResolution\t79.618","GEM_05_2014_TP4-400um":"B_input\t\t0\nB_Width\t\t50\nE_input\t\t67\nE_Width\t\t150\nDetector\t558\nB_field\t\t0.34\nSolid_angle\t110.378\nResolution\t43.593","GEM_05_2014_TP9-400um":"B_input\t\t0\nB_Width\t\t50\nE_input\t\t67\nE_Width\t\t150\nDetector\t469\nB_field\t\t0.95\nSolid_angle\t108.137\nResolution\t77.16","GIST_05_2015_TP1":"B_input\t\t0\n\nB_Width\t\t50\n\nE_input\t\t65\n\nE_Width\t\t100\n\nDetector\t358\n\nB_field\t\t.83\n\nSolid_angle\t4.647\n\nResolution\t82\n\nXzp 34.7249\nYzp 74.0212","GIST_05_2015_TP2":"B_input\t\t0\n\nB_Width\t\t50\n\nE_input\t\t65\n\nE_Width\t\t100\n\nDetector\t349\n\nB_field\t\t.92\n\nSolid_angle\t4.647\n\nResolution\t80\n\nXzp 34.7249\nYzp 74.0212","GIST_05_2015_TP3":"B_input\t\t0\n\nB_Width\t\t50\n\nE_input\t\t65\n\nE_Width\t\t50\n\nDetector\t351\n\nB_field\t\t.81\n\nSolid_angle\t4.633\n\nResolution\t13\n\nXzp 34.7249\nYzp 74.0212","Gemini_05_2013_1":"B_input\t\t0\nB_Width\t\t75\nE_input\t\t99\nE_Width\t\t300\nDetector\t686\nB_field\t\t0.715\nSolid_angle\t378.8","TAP18Kar_TP1":"B_input\t\t0\nB_Width\t\t50\nE_input\t\t67\nE_Width\t\t200\nDetector\t\t427\nB_field\t\t0.961\nSolid_angle\t30.7\nResolution\t25\n","TAP18Kar_TP2":"B_input\t\t0\nB_Width\t\t50\nE_input\t\t69\nE_Width\t\t200\nDetector\t\t385\nB_field\t\t0.99\nSolid_angle\t29.5\nResolution\t25\n","TAP18Kar_TP3S1-65":"B_input\t\t0\nB_Width\t\t50\nE_input\t\t67\nE_Width\t\t150\nDetector\t\t408\nB_field\t\t0.909\nSolid_angle\t28.6\nResolution\t25\n","TAP18Kar_TP3S66-86":"B_input\t\t0\nB_Width\t\t50\nE_input\t\t67\nE_Width\t\t200\nDetector\t\t408\nB_field\t\t0.909\nSolid_angle\t28.6\nResolution\t25\n","TAP18Kar_TP4":"B_input\t\t0\nB_Width\t\t50\nE_input\t\t70\nE_Width\t\t150\nDetector\t\t410\nB_field\t\t0.903\nSolid_angle\t27.5\nResolution\t25\n","TAP18Kar_TP5":"B_input\t\t0\nB_Width\t\t50\nE_input\t\t65\nE_Width\t\t150\nDetector\t\t310\nB_field\t\t0.976\nSolid_angle\t81.7\nResolution\t25","TAP2012_TP1":"B_input\t\t0\nB_Width\t\t50\nE_input\t\t67.5\nE_Width\t\t150\nDetector\t\t362.5\nB_field\t\t0.965\nSolid_angle\t10\nResolution\t25\n","TAP2012_TP2":"B_input\t\t0\nB_Width\t\t50\nE_input\t\t65\nE_Width\t\t150\nDetector\t\t411\nB_field\t\t0.985\nSolid_angle\t10\nResolution\t10\n","TAP2012_TP3":"B_input\t\t0\nB_Width\t\t50\nE_input\t\t68\nE_Width\t\t150\nDetector\t\t345\nB_field\t\t0.9325\nSolid_angle\t10\nResolution\t10\n","TAPCoil_TP1-200um":"TP0\nB_input\t\t0\nB_Width\t\t50\nE_input\t\t60\nE_Width\t\t200\nDetector\t335\nB_field\t\t0.946\nSolid_angle\t87\nResolution\t25\n","TAPCoil_TP1-500um":"TP0\nB_input\t\t0\nB_Width\t\t50\nE_input\t\t60\nE_Width\t\t200\nDetector\t335\nB_field\t\t0.946\nSolid_angle\t545\nResolution\t25\n","TAPCryo_TP1":"TP0\nB_input\t\t0\nB_Width\t\t50\nE_input\t\t67.5\nE_Width\t\t200\nDetector\t428.5\nB_field\t\t0.961\nSolid_angle\t32.29\nResolution\t25\n","TAPCryo_TP2":"TP0\nB_input\t\t0\nB_Width\t\t50\nE_input\t\t69\nE_Width\t\t200\nDetector\t383\nB_field\t\t0.990\nSolid_angle\t32.29\nResolution\t25\n","TAPCryo_TP3":"TP0\nB_input\t\t0\nB_Width\t\t50\nE_input\t\t60\nE_Width\t\t200\nDetector\t335\nB_field\t\t0.946\nSolid_angle\t545\nResolution\t25\n","TAPCryo_TP4":"TP0\nB_input\t\t0\nB_Width\t\t50\nE_input\t\t69.5\nE_Width\t\t200\nDetector\t412\nB_field\t\t0.903\nSolid_angle\t33.97\nResolution\t25\n","TAP_15_FrontSurfaceTP":"B_input\t\t0\nB_Width\t\t50\nE_input\t\t65\nE_Width\t\t150\nDetector\t485\nB_field\t\t0.96\nSolid_angle\t80.4\nResolution\t50","TAP_17_TP1":"B_input\t\t0\nB_Width\t\t50\nE_input\t\t65\nE_Width\t\t150\nDetector\t470\nB_field\t\t0.913\nSolid_angle\t15.8\nResolution\t25\n","TAP_17_TP2":"B_input\t\t0\nB_Width\t\t50\nE_input\t\t65\nE_Width\t\t150\nDetector\t437\nB_field\t\t0.876\nSolid_angle\t7.96\nResolution\t25\n","TAP_17_TP3":"B_input\t\t0\nB_Width\t\t50\nE_input\t\t65\nE_Width\t\t150\nDetector\t397\nB_field\t\t0.969\nSolid_angle\t26.15\nResolution\t25","TAP_17_TP4":"B_input\t\t0\nB_Width\t\t50\nE_input\t\t65\nE_Width\t\t150\nDetector\t350\nB_field\t\t0.959\nSolid_angle\t16.5\nResolution\t25","TAP_20_Kar_TP1_200um":"B_input\t\t0\nB_Width\t\t50\nE_input\t\t60\nE_Width\t\t200\nDetector\t\t335\nB_field\t\t0.946\nSolid_angle\t71\nResolution\t25\n","TAP_20_Kar_TP1_500um":"B_input\t\t0\nB_Width\t\t50\nE_input\t\t60\nE_Width\t\t200\nDetector\t\t335\nB_field\t\t0.946\nSolid_angle\t443\nResolution\t25\n","VULCAN2023_2W":"B_input\t\t0\nB_Width\t\t50\nE_input\t\t70\nE_Width\t\t150\nDetector\t420\nB_field\t\t0.9\nSolid_angle\t118.29\nResolution\t25\n"};
+
+// ---------- physics (tp_physics.py) ----------
+const QE = 1.60217657e-19, MP = 1.67262178e-27;
+class Geo {   // all distances from the magnet entrance; E in kV/cm, B in T; energies MeV per nucleon
+  constructor(s) {
+    this.s = s;
+    this.E = s.e_sign * s.e_field * 1e2;          // V/mm
+    this.B = s.b_sign * s.b_field;
+    this.Le2 = s.detector - s.e_length - s.e_input;
+    this.Lb2 = s.detector - s.b_length;
+  }
+  defl(A, Z, en) {   // (x, y) deflection in mm
+    const s = this.s, m = A * MP, q = Z * QE, EJ = en * 1e6 * A * QE;
+    return [q * this.E * s.e_length * (this.Le2 + s.e_length / 2) / (2 * EJ),
+      q * this.B * s.b_length * (this.Lb2 + s.b_length / 2) / Math.sqrt(2 * m * EJ) * 1e-3];
+  }
+  pos(en, zoa) { const s = this.s, e = en * 1e6 * QE; return zoa * QE * this.B * s.b_length * (this.Lb2 + s.b_length / 2) / Math.sqrt(2 * MP * e) * 1e-3; }
+  energy(y, zoa) { const s = this.s, E = (zoa * QE * this.B * s.b_length * (this.Lb2 + s.b_length / 2) * 1e-3 / (y * Math.sqrt(2 * MP))) ** 2; return E * 1e-6 / QE; }
+}
+const fading = t => (30.0 / t) ** 0.161;   // PSL(30 min) = PSL(t) / f
+function ipCal(A, en) {   // PSL per ion, TOTAL energy in MeV (P. Martin proton/gold, A. Alejo others)
+  if (A === 1) return en < 1.6 ? 0.151 * en ** 0.6 : 0.284 * en ** -0.75;
+  if (A === 2) { const e = en / 2.0; return e < 0.931 ? 0.1754 * e : 0.1563 * e ** -0.4363; }
+  if (A === 12) return en <= 73.6 ? en * (2.51e-3 + 4.56e-4 * en - 8.90e-6 * en ** 2 + 4.61e-8 * en ** 3) : 4.55 * en ** -0.533;
+  if (A === 14) return en <= 82 ? 0.0049714 * en + 1.469e-4 * en ** 2 - 1.39e-6 * en ** 3 : 3.68 * en ** -0.4;
+  if (A === 16) return en <= 95 ? 0.00435 * en + 1.125e-4 * en ** 2 - 9.28e-7 * en ** 3 : 3.9 * en ** -0.4;
+  if (A === 63.5) return en <= 350 ? 0.003 * en : 11 * en ** -0.4;
+  if (A === 197) return en <= 2760 ? 1.88 * (1 - Math.exp(-(en / 197) / 2.13)) ** 2.14 : 0.0;
+  return NaN;
+}
+const AU_POLY = [1.035e-21, -5.095e-18, -3.023e-15, 7.254e-11, -2.111e-07, 3.013e-04, -0.2418, 105.7, 5228.0];
+function dedx(mat, ion, e) {   // MeV/mm, total ion energy in MeV (SRIM fits from ionenergyout.m / ionoutplot.m)
+  if (mat === "Al") {
+    if (ion === "proton") return 48.92 * e ** -0.6722 - 1.024;
+    if (ion === "carbon") return 1133 * Math.exp(-0.0224 * e) + 306.2 * Math.exp(-0.001961 * e);
+    if (ion === "gold") { let y = 0; for (const c of AU_POLY) y = y * e + c; return y; }
+  } else if (mat === "Kapton") {
+    if (ion === "proton") return 35.225 * e ** -0.772;
+    if (ion === "carbon") return 5662.8 * e ** -0.69;
+  }
+  throw new Error(`no dE/dx fit for ${ion} in ${mat}`);
+}
+const ION_A = { proton: 1, carbon: 12, gold: 197 };
+function energyOut(ion, eIn, thick, mat = "Al", step = 0.01) {   // MeV/n leaving the slab; stopped ions → 0
+  const A = ION_A[ion], n = pyRound(thick / step), k = step / 1000.0;
+  const one = v => {
+    let e = v * A;
+    if (n > 0) {
+      if (!(e > 0)) e = 0;
+      else for (let i = 0; i < n; i++) { e = e - dedx(mat, ion, e) * k; if (!(e > 0)) { e = 0; break; } }
+    }
+    return e / A;
+  };
+  return typeof eIn === "number" ? one(eIn) : Float64Array.from(eIn, one);
+}
+function ionRange(ion, eIn, mat = "Al", step = 0.01, maxUm = 5000.0) {
+  let e = eIn * ION_A[ion], tr = 0.0;
+  while (tr < maxUm) { e -= dedx(mat, ion, e) * (step / 1000.0); tr += step; if (e <= 0) return tr; }
+  return Infinity;
+}
+
+// ---------- filters: f(A, E per nucleon) → E per nucleon reaching the IP ----------
+const clip0 = v => (v < 0 ? 0 : v);
+const copy = en => Float64Array.from(en);
+const each = (en, f) => Float64Array.from(en, f);
+const FILTERS = { NoFilter: (A, en) => copy(en) };
+const SLAB_ION = { 1: "proton", 12: "carbon", 197: "gold" };
+for (const t of [5, 10, 25, 50, 100]) for (const mat of ["Al", "Kapton"])
+  FILTERS[`${mat}_${t}um`] = (A, en) => { const ion = SLAB_ION[Math.trunc(A)]; return ion ? energyOut(ion, en, t, mat) : copy(en); };
+const AL6_ION = { 1: "proton", 2: "proton", 12: "carbon", 197: "gold" };
+FILTERS.Al_6um = (A, en) => { const ion = AL6_ION[Math.trunc(A)]; return ion ? energyOut(ion, en, 6.0, "Al") : copy(en); };
+FILTERS.Al_12um_pWrap = (A, en) => {
+  const m = Math.trunc(A);
+  if (m === 1) return each(en, x => clip0(x < 1.1 ? 0.0 : x < 5 ? (-3.1205e-03 * x ** 6 + 6.7153e-02 * x ** 5 - 5.8854e-01 * x ** 4 + 2.6926e00 * x ** 3 - 6.8241e00 * x ** 2 + 1.0283e01 * x - 5.9591e00) : 1.0504 * x - 0.5684));
+  if (m === 2) return each(en, x => clip0(x < 0.7 ? 0.0 : x < 5 ? (-1.877e-03 * x ** 6 + 3.582e-02 * x ** 5 - 2.774e-01 * x ** 4 + 1.118e00 * x ** 3 - 2.503e00 * x ** 2 + 4.066e00 * x - 1.938e00) : 1.0285 * x - 0.2817));
+  if (m === 12 || m === 197) return FILTERS.Al_6um(m, FILTERS.Al_6um(m, en));
+  return copy(en);
+};
+FILTERS.Al_25um_pWrap = (A, en) => {
+  const m = Math.trunc(A);
+  if (m === 1) return each(en, x => clip0(x < 1.6 ? 0.0 : x < 9.5 ? (-1.1251e-04 * x ** 6 + 4.3106e-03 * x ** 5 - 6.6965e-02 * x ** 4 + 5.4021e-01 * x ** 3 - 2.3999e00 * x ** 2 + 6.6929e00 * x - 6.3543e00) : 1.0321 * x - 0.6007));
+  if (m === 2) return each(en, x => clip0(x < 1.05 ? 0.0 : x < 5 ? (-3.952e-03 * x ** 6 + 7.867e-02 * x ** 5 - 6.391e-01 * x ** 4 + 2.719e00 * x ** 3 - 6.433e00 * x ** 2 + 9.228e00 * x - 5.017e00) : 1.048 * x - 0.4687));
+  return copy(en);
+};
+FILTERS.Al_70um_pWrap = (A, en) => {
+  const m = Math.trunc(A);
+  if (m === 1) return each(en, x => clip0(x >= 7.5 && x < 24 ? (-5.2375e-08 * x ** 6 + 5.7611e-06 * x ** 5 - 2.6346e-04 * x ** 4 + 6.4673e-03 * x ** 3 - 9.1637e-02 * x ** 2 + 1.7485e00 * x - 3.3874e00) : 0.0));
+  if (m === 2) return each(en, x => clip0(x < 1.850 ? 0.0 : x < 5 ? (-1.128e-03 * x ** 6 + 3.403e-02 * x ** 5 - 4.191e-01 * x ** 4 + 2.701e00 * x ** 3 - 9.658e00 * x ** 2 + 1.943e01 * x - 1.576e01) : 1.0704 * x - 0.961));
+  return copy(en);
+};
+FILTERS.Cu_250um_pWrap = (A, en) => {
+  const m = Math.trunc(A);
+  if (m === 1) return each(en, x => clip0(x >= 18 && x < 140 ? (-2.7159e-11 * x ** 6 + 1.3261e-08 * x ** 5 - 2.6529e-06 * x ** 4 + 2.8016e-04 * x ** 3 - 1.6763e-02 * x ** 2 + 1.5658e00 * x - 1.0369e01) : 0.0));
+  if (m === 2) return each(en, x => clip0(x < 6.6 ? 0.0 : x < 14 ? (-2.595e-05 * x ** 6 + 2.151e-03 * x ** 5 - 7.315e-02 * x ** 4 + 1.308e00 * x ** 3 - 1.301e01 * x ** 2 + 6.969e01 * x - 1.553e02) : 1.1269 * x - 4.3456));
+  return copy(en);
+};
+FILTERS.Cu_500um_pWrap = (A, en) => {
+  const m = Math.trunc(A);
+  if (m === 1) return each(en, x => clip0(x < 15.3 ? 0.0 : x < 20.01
+    ? (-0.00834 * x ** 6 + 0.901 * x ** 5 - 40.51 * x ** 4 + 970.6 * x ** 3 - 1.307e04 * x ** 2 + 9.372e04 * x - 2.799e05)
+    : (-2.933e-10 * x ** 6 + 1.181e-07 * x ** 5 - 1.95e-05 * x ** 4 + 0.001699 * x ** 3 - 0.08354 * x ** 2 + 3.295 * x - 32.34)));
+  if (m === 2) return each(en, x => clip0(x < 6 ? 0.0 : x < 12
+    ? (-1.354 * x ** 6 + 91.54 * x ** 5 - 2577 * x ** 4 + 3.867e04 * x ** 3 - 3.264e05 * x ** 2 + 1.468e06 * x - 2.752e06)
+    : (-1.896e-08 * x ** 6 + 3.898e-06 * x ** 5 - 0.0003293 * x ** 4 + 0.01469 * x ** 3 - 0.3689 * x ** 2 + 6.12 * x - 34.88)));
+  return copy(en);
+};
+FILTERS.Fe_125um_pWrap = (A, en) => {
+  const m = Math.trunc(A);
+  if (m === 1) return each(en, x => clip0(x >= 12 && x < 70 ? (-2.2666e-09 * x ** 6 + 5.0931e-07 * x ** 5 - 4.7203e-05 * x ** 4 + 2.3247e-03 * x ** 3 - 6.5271e-02 * x ** 2 + 2.0395e00 * x - 8.9649e00) : 0.0));
+  if (m === 2) return each(en, x => clip0(x < 4.3 ? 0.0 : x < 10 ? (-2.912e-04 * x ** 6 + 1.512e-02 * x ** 5 - 3.231e-01 * x ** 4 + 3.638e00 * x ** 3 - 2.282e01 * x ** 2 + 7.709e01 * x - 1.085e02) : 1.1282 * x - 2.8274));
+  return copy(en);
+};
+FILTERS.Fe_1000um_pwrap = (A, en) => {
+  const m = Math.trunc(A);
+  if (m === 1) return each(en, x => clip0(x >= 20 && x < 100 ? (-3e-10 * x ** 6 + 1e-7 * x ** 5 - 2e-5 * x ** 4 + 0.0018 * x ** 3 - 0.0867 * x ** 2 + 3.407 * x - 38.298) : 0.0));
+  if (m === 2) return each(en, x => clip0(x >= 5 && x < 50 ? (-8e-9 * x ** 6 + 2e-6 * x ** 5 - 0.0001 * x ** 4 + 0.0067 * x ** 3 - 0.1816 * x ** 2 + 3.9025 * x - 27.528) : 0.0));
+  return copy(en);
+};
+FILTERS.Fe_2000um_pwrap = (A, en) => {
+  const m = Math.trunc(A);
+  if (m === 1) return each(en, x => clip0(x >= 30 && x < 100 ? (-2e-10 * x ** 6 + 1e-7 * x ** 5 - 2e-5 * x ** 4 + 0.0018 * x ** 3 - 0.0993 * x ** 2 + 4.2916 * x - 64.254) : 0.0));
+  if (m === 2) return each(en, x => clip0(x >= 15 && x < 50 ? (-2e-8 * x ** 6 + 3e-6 * x ** 5 - 0.0003 * x ** 4 + 0.0134 * x ** 3 - 0.3633 * x ** 2 + 6.8051 * x - 55.056) : 0.0));
+  return copy(en);
+};
+FILTERS.Kapton_125um = (A, en) => {
+  const m = Math.trunc(A);
+  if (m === 1) return each(en, x => clip0(x >= 4 && x < 30 ? (8e-7 * x ** 6 - 8e-5 * x ** 5 + 0.003 * x ** 4 - 0.0556 * x ** 3 + 0.5022 * x ** 2 - 0.8333 * x + 0.1393) : 0.0));
+  if (m === 12) return each(en, x => clip0(x >= 6 && x < 30 ? (1e-7 * x ** 6 - 2e-5 * x ** 5 + 0.0013 * x ** 4 - 0.0355 * x ** 3 + 0.4703 * x ** 2 - 1.6067 * x + 1.0063) : 0.0));
+  return copy(en);
+};
+const FILTER_NAMES = Object.keys(FILTERS).sort();
+
+// ---------- analysis (tp_analysis.py) ----------
+const DEF = () => ({
+  e_field: 0.0, b_field: 0.0, e_sign: 1, b_sign: 1, b_length: 0.0, e_input: 0.0, e_length: 0.0, detector: 0.0, solid_angle: 1.0,
+  resolution: 50.0, x_zp: 0.0, y_zp: 0.0, angle: 0.0, c_min: 0.0, c_max: 1.0, cmap: "inferno",
+  trace_width: 20.0, bg_left: false, bg_left_px: 5.0, bg_right: false, bg_right_px: 5.0, det_threshold: false, det_threshold_mm: 2.0,
+  fading: false, fading_time: 30.0, calibration: false,
+  species: [{ A: 1.0, Z: 1.0, e_min: 1.0, e_max: 100.0, show: true, colour: "r" }],
+  filters: [{ y1: -1000.0, y2: 1000.0, name: "NoFilter" }],
+});
+const SP_KEYS = ["A", "Z", "e_min", "e_max", "show", "colour"], FL_KEYS = ["y1", "y2", "name"];
+
+function energyOnIP(st, E, Z, A) {   // getEnergyOnIP: each point gets the filter of the one band covering it, else 0
+  const geo = new Geo(st), sgn = st.b_sign > 0 ? 1.0 : -1.0, n = E.length;
+  const eip = new Float64Array(n), nb = new Int32Array(n);
+  for (const band of st.filters) {
+    let y1 = +band.y1, y2 = +band.y2;
+    if (y1 * sgn < 0) y1 = sgn * 1.0;
+    if (y2 * sgn < 0) y2 = sgn * 1.0;
+    if (y1 === y2) continue;
+    const ea = geo.energy(y1, Z / A), eb = geo.energy(y2, Z / A);
+    const lo = eb < ea ? eb : ea, hi = eb > ea ? eb : ea;   // Python min()/max()
+    const idx = [];
+    for (let i = 0; i < n; i++) if (E[i] > lo && E[i] < hi) idx.push(i);
+    if (!idx.length) continue;
+    const out = (FILTERS[band.name] || FILTERS.NoFilter)(A, idx.map(i => E[i]));
+    idx.forEach((i, k) => { eip[i] = out[k]; nb[i] += 1; });
+  }
+  for (let i = 0; i < n; i++) if (nb[i] !== 1) eip[i] = 0.0;
+  return eip;
+}
+// numpy's pairwise summation, so sums of float scans match np.sum to the last bit
+function pwSum(a, i0, n) {
+  if (n < 8) { let r = 0.0; for (let i = 0; i < n; i++) r += a[i0 + i]; return r; }
+  if (n <= 128) {
+    const r = [a[i0], a[i0 + 1], a[i0 + 2], a[i0 + 3], a[i0 + 4], a[i0 + 5], a[i0 + 6], a[i0 + 7]];
+    let i = 8;
+    for (; i < n - (n % 8); i += 8) for (let j = 0; j < 8; j++) r[j] += a[i0 + i + j];
+    let res = ((r[0] + r[1]) + (r[2] + r[3])) + ((r[4] + r[5]) + (r[6] + r[7]));
+    for (; i < n; i++) res += a[i0 + i];
+    return res;
+  }
+  let n2 = Math.floor(n / 2); n2 -= n2 % 8;
+  return pwSum(a, i0, n2) + pwSum(a, i0 + n2, n - n2);
+}
+const axis = (n, res, zp) => { const a = new Float64Array(n); for (let k = 0; k < n; k++) a[k] = (k + 1) * 1e-3 * res - zp; return a; };
+function argminNear(arr, v) {   // np.abs(arr - v).argmin() on a uniform grid
+  const n = arr.length;
+  if (!Number.isFinite(v) || n === 0) return 0;
+  const d = n > 1 ? arr[1] - arr[0] : 1;
+  let k = Math.round((v - arr[0]) / d); k = Math.max(0, Math.min(n - 1, k));
+  let best = -1, bd = Infinity;
+  for (let j = Math.max(0, k - 3); j <= Math.min(n - 1, k + 3); j++) { const dd = Math.abs(arr[j] - v); if (dd < bd) { bd = dd; best = j; } }
+  return best;
+}
+function arange(start, stop, step) {   // np.arange for floats, including its fill rule
+  const len = Math.ceil((stop - start) / step);
+  if (!Number.isFinite(len)) throw new Error("arange: cannot compute length");
+  const n = Math.max(0, len), out = new Float64Array(n);
+  if (n > 0) out[0] = start;
+  if (n > 1) out[1] = start + step;
+  const delta = out[1] - start;
+  for (let i = 2; i < n; i++) out[i] = start + i * delta;
+  return out;
+}
+function extractSpectrum(img, st, sp) {   // extract_spectrum(): one species → columns E, PSL_bgsub, N, dN/dE, dN/dE/sr[, noise]
+  const { data, w: nx, h: ny } = img, res = +st.resolution, geo = new Geo(st);
+  const X = axis(nx, res, st.x_zp), Y = axis(ny, res, st.y_zp);
+  const theta = st.angle * (Math.PI / 180.0), ct = Math.cos(theta), stt = Math.sin(theta);
+  const hw = pyRound(st.trace_width / 2.0 / ct);
+  if (hw < 1) throw new Error("Each trace has to be at least 2 pixels thick.");
+  const dl = pyRound(st.bg_left_px), dr = pyRound(st.bg_right_px);
+  const off = st.det_threshold ? pyRound(st.det_threshold_mm * 1e3 / res) : 0;
+  const zoa = sp.Z / sp.A;
+  const yLo = geo.pos(sp.e_max, zoa);
+  let yHi = geo.pos(sp.e_min, zoa);
+  let ySpan = 0; for (let k = 0; k < ny; k++) ySpan = Math.max(ySpan, Math.abs(Y[k]));
+  if (Math.abs(yHi) > ySpan) yHi = Math.sign(yHi) * ySpan;
+  const dy = (yHi > yLo ? 1.0 : -1.0) * 1e-3 * res / ct;
+  const yTr = arange(yLo, yHi + dy / 2, dy);
+  if (yTr.length < 3) throw new Error("Energy range maps to fewer than 3 pixels on the detector.");
+  const E = Float64Array.from(yTr, y => geo.energy(y, zoa)).sort();
+  const n = E.length;
+  const rowSum = (iy, a0, b0) => {
+    if (iy < 0 || iy >= ny) return 0.0;
+    const a = Math.max(0, Math.min(nx - 1, Math.min(a0, b0))), b = Math.max(0, Math.min(nx - 1, Math.max(a0, b0)));
+    return pwSum(data, iy * nx + a, b - a + 1);
+  };
+  const psl = new Float64Array(n), bgL = new Float64Array(n), bgR = new Float64Array(n), dt = new Float64Array(n), bgDt = new Float64Array(n);
+  for (let c = 0; c < n; c++) {
+    const [x, y] = geo.defl(sp.A, sp.Z, E[c]);
+    const xp = x * ct - y * stt, yp = y * ct + x * stt;
+    const iy = argminNear(Y, yp), ix = argminNear(X, xp);
+    psl[c] = rowSum(iy, ix - hw, ix + hw);
+    dt[c] = rowSum(iy, ix - hw + off, ix + hw + off);
+    if (st.bg_left) {
+      bgL[c] = rowSum(iy, ix - dl - 3 * hw, ix - dl - hw);
+      bgDt[c] += rowSum(iy, ix - dl - 3 * hw + off, ix - dl - hw + off);
+    }
+    if (st.bg_right) {
+      bgR[c] = rowSum(iy, ix + dr + hw, ix + dr + 3 * hw);
+      bgDt[c] += rowSum(iy, ix + dr + hw + off, ix + dr + 3 * hw + off);
+    }
+  }
+  const nBg = (st.bg_left ? 1 : 0) + (st.bg_right ? 1 : 0);
+  const pslSub = new Float64Array(n), N = new Float64Array(n), noise = new Float64Array(n);
+  for (let c = 0; c < n; c++) {
+    const bg = nBg ? (bgL[c] + bgR[c]) / nBg : 0.0;
+    pslSub[c] = psl[c] - bg;
+    N[c] = pslSub[c];
+    noise[c] = dt[c] - (nBg ? bgDt[c] / nBg : bgDt[c]);
+  }
+  if (st.fading) { const f = fading(st.fading_time); for (let c = 0; c < n; c++) { N[c] = N[c] / f; noise[c] = noise[c] / f; } }
+  if (st.calibration) {
+    const eip = energyOnIP(st, E, sp.Z, sp.A);
+    for (let c = 0; c < n; c++) { const fac = ipCal(sp.A, sp.A * eip[c]); N[c] = N[c] / fac; noise[c] = noise[c] / fac; }
+  }
+  for (let c = 0; c < n; c++) { if (!Number.isFinite(N[c])) N[c] = 0.0; if (!Number.isFinite(noise[c])) noise[c] = 0.0; }
+  const dNdE = new Float64Array(n), dtE = new Float64Array(n);
+  for (let c = 0; c < n - 1; c++) {
+    const dE = Math.abs(E[c + 1] - E[c]);
+    dNdE[c] = 0.5 * (N[c] + N[c + 1]) / dE;
+    dtE[c] = 0.5 * (noise[c] + noise[c + 1]) / dE;
+  }
+  dNdE[n - 1] = dNdE[n - 2]; dtE[n - 1] = dtE[n - 2];
+  const sr = st.solid_angle * 1e-9, dNdEsr = new Float64Array(n);
+  for (let c = 0; c < n; c++) {
+    if (!Number.isFinite(dNdE[c])) dNdE[c] = 0.0;
+    if (!Number.isFinite(dtE[c])) dtE[c] = 0.0;
+    dNdEsr[c] = dNdE[c] / sr; dtE[c] = dtE[c] / sr;
+  }
+  const cols = st.det_threshold ? [E, pslSub, N, dNdE, dNdEsr, dtE] : [E, pslSub, N, dNdE, dNdEsr];
+  return { E, PSL: pslSub, N, dNdE, dNdEsr, noise: st.det_threshold ? dtE : null, cols };
+}
+const e7 = v => {   // numpy savetxt fmt="%.7e"
+  if (Number.isNaN(v)) return "nan";
+  if (!Number.isFinite(v)) return v > 0 ? "inf" : "-inf";
+  const s = (Object.is(v, -0) ? "-" : "") + v.toExponential(7);
+  return s.replace(/e([+-])(\d)$/, "e$10$2");
+};
+const spectrumText = res => { let out = ""; for (let i = 0; i < res.E.length; i++) out += res.cols.map(c => e7(c[i])).join(" ") + "\n"; return out; };
+function validate(st) {
+  const fatal = [], warn = [];
+  if (st.b_field === 0) fatal.push("B field is zero - there is no dispersion to analyse.");
+  if (st.b_length <= 0) fatal.push("Magnet width (B_Width) must be > 0.");
+  if (st.detector <= st.b_length) fatal.push("Detector distance must exceed the magnet length.");
+  if (st.solid_angle <= 0) fatal.push("Solid angle must be > 0.");
+  if (st.e_input <= st.b_length) warn.push("The E plates start before the magnet ends - the magnet-to-plates distance should exceed the magnet length.");
+  if (st.e_length && st.detector <= st.e_input + st.e_length) warn.push("E_input + E_Width reaches past the detector.");
+  if (st.e_field === 0) warn.push("E field is zero - traces will collapse onto one line.");
+  return { fatal, warn };
+}
+const SET_KEYS = { b_width: "b_length", e_input: "e_input", e_width: "e_length", detector: "detector", b_field: "b_field", e_field: "e_field",
+  solid_angle: "solid_angle", resolution: "resolution", xzp: "x_zp", yzp: "y_zp" };
+function readSettings(text, st) {   // Settings/<experiment>_<TP>.txt → state (B_input folded into Detector and E_input)
+  let label = "", bIn = 0.0;
+  const values = {};
+  for (const line of text.split(/\r\n|\r|\n/)) {
+    const parts = line.replace(/\t/g, " ").trim().split(/\s+/).filter(Boolean);
+    if (!parts.length || parts[0].startsWith("#") || parts[0].startsWith("%")) continue;
+    if (parts.length === 1) { label = label || parts[0]; continue; }
+    const key = parts[0].trim().toLowerCase(), val = Number(parts[1]);
+    if (!Number.isFinite(val)) continue;
+    if (key === "b_input") { bIn = val; continue; }
+    if (SET_KEYS[key]) values[SET_KEYS[key]] = val;
+  }
+  const notes = [];
+  if (bIn) {
+    for (const k of ["detector", "e_input"]) if (k in values) values[k] -= bIn;
+    notes.push(`B_input was ${pyG(bIn)} mm; folded into Detector and E_input, which are now measured from the magnet entrance (spectra unchanged).`);
+  }
+  Object.assign(st, values);
+  return { label, notes };
+}
+// AnalysisState.to_dict() → the same JSON as AutosaveParam/*.json
+const pyNum = v => {
+  if (Number.isNaN(v)) return "NaN";
+  if (!Number.isFinite(v)) return v > 0 ? "Infinity" : "-Infinity";
+  if (Number.isInteger(v) && Math.abs(v) < 1e16) return v.toFixed(1);
+  const a = Math.abs(v);
+  if (a >= 1e16 || a < 1e-4) return v.toExponential().replace(/e([+-])(\d)$/, "e$10$2");
+  return String(v);
+};
+function pyJSON(v, ind = "", intKeys = new Set(["e_sign", "b_sign"]), key = "") {
+  if (Array.isArray(v)) return v.length ? "[\n" + v.map(x => ind + "  " + pyJSON(x, ind + "  ", intKeys)).join(",\n") + "\n" + ind + "]" : "[]";
+  if (v && typeof v === "object") { const ks = Object.keys(v); return ks.length ? "{\n" + ks.map(k => `${ind}  ${JSON.stringify(k)}: ${pyJSON(v[k], ind + "  ", intKeys, k)}`).join(",\n") + "\n" + ind + "}" : "{}"; }
+  if (typeof v === "number") return intKeys.has(key) ? String(Math.trunc(v)) : pyNum(v);
+  return JSON.stringify(v);
+}
+function stateDict(st) {
+  const d = {};
+  for (const k of Object.keys(DEF())) d[k] = k === "species" ? st.species.map(s => Object.fromEntries(SP_KEYS.map(q => [q, s[q]])))
+    : k === "filters" ? st.filters.map(f => Object.fromEntries(FL_KEYS.map(q => [q, f[q]]))) : st[k];
+  return d;
+}
+function fromDict(d) {   // AnalysisState.from_dict
+  const st = DEF();
+  for (const k of Object.keys(st)) if (k !== "species" && k !== "filters" && k in d) st[k] = d[k];
+  const sp = Array.isArray(d.species) ? d.species.map(s => ({ ...DEF().species[0], ...s })) : [];
+  const fl = Array.isArray(d.filters) ? d.filters.map(f => ({ ...DEF().filters[0], ...f })) : [];
+  st.species = sp.length ? sp : DEF().species;
+  st.filters = fl.length ? fl : DEF().filters;
+  return st;
+}
+
+// ---------- state + widgets ----------
+let S = DEF();
+const IMG = { data: null, w: 0, h: 0, name: "", lo: 0, hi: 1, small: null, k: 1, sw: 0, sh: 0, off: null, offKey: "" };
+const UI = { pick: null, sel: null, tab: "img", exp: "", tp: "" };
+let R = null;   // last Get spectra
+const COLOURS = [["r", "Red", "#FF0000"], ["g", "Green", "#008000"], ["b", "Blue", "#0000FF"], ["k", "Black", "#000000"], ["m", "Magenta", "#BF00BF"], ["c", "Cyan", "#00BFBF"], ["y", "Yellow", "#BFBF00"], ["w", "White", "#FFFFFF"]];
+const HEX = Object.fromEntries(COLOURS.map(c => [c[0], c[2]]));
+const chartCol = c => (c === "k" ? LOS.theme.curve : c === "w" ? "#9CA3AF" : HEX[c] || HEX.r);
+const NUM = [["e_field", "ta-ef", 0.0], ["b_field", "ta-bf", 0.0], ["b_length", "ta-bl", 0.0], ["e_input", "ta-ei", 0.0], ["e_length", "ta-el", 0.0],
+  ["detector", "ta-det", 0.0], ["solid_angle", "ta-sr", 1.0], ["resolution", "ta-res", 50.0], ["x_zp", "ta-xzp", 0.0], ["y_zp", "ta-yzp", 0.0],
+  ["trace_width", "ta-tw", 10.0], ["bg_left_px", "ta-bglp", 5.0], ["bg_right_px", "ta-bgrp", 5.0], ["det_threshold_mm", "ta-dtmm", 2.0], ["fading_time", "ta-fadt", 30.0]];
+const CHK = [["bg_left", "ta-bgl"], ["bg_right", "ta-bgr"], ["det_threshold", "ta-dt"], ["fading", "ta-fad"], ["calibration", "ta-cal"]];
+const num = (txt, d) => { const t = String(txt).trim(), v = Number(t); return t !== "" && Number.isFinite(v) ? v : d; };   // fval()
+const sl = $("ta-sliders");
+const fAng = LOS.sliderField(sl, { id: "ta-ang", label: "Rotation", unit: "deg", min: -45, max: 45, value: 0, step: 0.1, sig: 6 });
+const fCmin = LOS.sliderField(sl, { id: "ta-cmin", label: "Colour min", unit: "PSL", min: 0, max: 1, value: 0, sig: 6 });
+const fCmax = LOS.sliderField(sl, { id: "ta-cmax", label: "Colour max", unit: "PSL", min: 0, max: 1, value: 1, sig: 6 });
+
+function pull() {   // widgets → state (pull_state)
+  for (const [k, id, d] of NUM) S[k] = num($(id).value, d);
+  for (const [k, id] of CHK) S[k] = $(id).checked;
+  S.fading_time = Math.max(S.fading_time, 1e-6);
+  S.angle = Number.isFinite(fAng.value) ? fAng.value : 0.0;
+  S.c_min = Number.isFinite(fCmin.value) ? fCmin.value : 0.0;
+  S.c_max = Number.isFinite(fCmax.value) ? fCmax.value : 1.0;
+  S.cmap = $("ta-cmap").value;
+  S.e_sign = $("ta-es").getAttribute("aria-pressed") === "true" ? -1 : 1;
+  S.b_sign = $("ta-bs").getAttribute("aria-pressed") === "true" ? -1 : 1;
+}
+function push() {   // state → widgets (push_state); values shown with :g, as in the Python GUI
+  for (const [k, id] of NUM) $(id).value = pyG(+S[k]);
+  for (const [k, id] of CHK) $(id).checked = !!S[k];
+  fAng.set(+S.angle, true); fCmin.set(+S.c_min, true); fCmax.set(+S.c_max, true);
+  const cm = $("ta-cmap");
+  if (![...cm.options].some(o => o.value === S.cmap)) cm.add(new Option(S.cmap, S.cmap));
+  cm.value = S.cmap;
+  for (const [id, sg] of [["ta-es", S.e_sign], ["ta-bs", S.b_sign]]) { $(id).setAttribute("aria-pressed", sg < 0 ? "true" : "false"); $(id).textContent = sg < 0 ? "−" : "+"; }
+  fillSpecies(); fillFilters();
+}
+
+// species table
+function fillSpecies() {
+  const host = $("ta-sp");
+  host.innerHTML = '<span class="hd">M</span><span class="hd">Z</span><span class="hd">E min</span><span class="hd">E max</span><span class="hd" title="Show">On</span><span class="hd">Colour</span><span></span>';
+  S.species.forEach((sp, i) => {
+    for (const k of ["A", "Z", "e_min", "e_max"]) sp[k] = num(pyG(+sp[k]), DEF().species[0][k]);   // the table holds :g text, as in the Python GUI
+    const mk = (k, label) => { const e = document.createElement("input"); e.type = "text"; e.inputMode = "decimal"; e.value = pyG(+sp[k]); e.setAttribute("aria-label", `${label}, species ${i + 1}`); e.addEventListener("input", () => { sp[k] = num(e.value, DEF().species[0][k]); changed(); }); return e; };
+    host.append(mk("A", "Mass number"), mk("Z", "Charge state"), mk("e_min", "E min"), mk("e_max", "E max"));
+    const chk = document.createElement("input"); chk.type = "checkbox"; chk.checked = !!sp.show; chk.setAttribute("aria-label", `Show species ${i + 1}`);
+    chk.addEventListener("change", () => { sp.show = chk.checked; changed(); });
+    const ck = document.createElement("label"); ck.className = "chk"; ck.append(chk);
+    const col = document.createElement("div"); col.className = "colour";
+    const sw = document.createElement("span"); sw.className = "sw";
+    const sel = document.createElement("select"); sel.setAttribute("aria-label", `Colour, species ${i + 1}`);
+    for (const [k, name] of COLOURS) sel.add(new Option(name, k));
+    sel.value = HEX[sp.colour] ? sp.colour : "r";
+    const paint = () => { sw.style.background = HEX[sel.value]; sw.style.boxShadow = sel.value === "w" ? "0 0 0 1px var(--border)" : ""; };
+    paint();
+    sel.addEventListener("change", () => { sp.colour = sel.value; paint(); changed(); });
+    col.append(sw, sel);
+    const rm = document.createElement("button"); rm.type = "button"; rm.className = "rm"; rm.textContent = "×"; rm.setAttribute("aria-label", `Remove species ${i + 1}`);
+    rm.addEventListener("click", () => {
+      if (S.species.length <= 1) { LOS.toast("At least one species must be defined.", "warn"); return; }
+      S.species.splice(i, 1); fillSpecies(); changed();
+    });
+    host.append(ck, col, rm);
+  });
+}
+// filter table; the last y box you clicked is the one "Pick position" / "Shift all" act on
+function fillFilters() {
+  const host = $("ta-fl");
+  host.innerHTML = '<span class="hd">y1 (<span class="u">mm</span>)</span><span class="hd">y2 (<span class="u">mm</span>)</span><span class="hd">Filter</span><span></span>';
+  S.filters.forEach((fb, i) => {
+    for (const k of ["y1", "y2"]) fb[k] = num(pyG(+fb[k]), k === "y1" ? -1000.0 : 1000.0);
+    for (const k of ["y1", "y2"]) {
+      const e = document.createElement("input"); e.type = "text"; e.inputMode = "decimal"; e.value = pyG(+fb[k]); e.dataset.row = i; e.dataset.col = k;
+      e.setAttribute("aria-label", `${k}, filter ${i + 1}`);
+      if (UI.sel && UI.sel.row === i && UI.sel.col === k) e.classList.add("sel");
+      e.addEventListener("focus", () => { UI.sel = { row: i, col: k }; host.querySelectorAll("input.sel").forEach(x => x.classList.remove("sel")); e.classList.add("sel"); });
+      e.addEventListener("input", () => { fb[k] = num(e.value, k === "y1" ? -1000.0 : 1000.0); changed(); });
+      host.append(e);
+    }
+    const sel = document.createElement("select"); sel.setAttribute("aria-label", `Filter ${i + 1}`);
+    for (const nm of FILTER_NAMES) sel.add(new Option(nm, nm));
+    sel.value = FILTERS[fb.name] ? fb.name : "NoFilter";
+    if (!FILTERS[fb.name]) fb.name = "NoFilter";
+    sel.addEventListener("change", () => { fb.name = sel.value; changed(); });
+    const rm = document.createElement("button"); rm.type = "button"; rm.className = "rm"; rm.textContent = "×"; rm.setAttribute("aria-label", `Remove filter ${i + 1}`);
+    rm.addEventListener("click", () => { S.filters.splice(i, 1); if (!S.filters.length) S.filters = DEF().filters; UI.sel = null; fillFilters(); changed(); });
+    host.append(sel, rm);
+  });
+}
+
+// ---------- settings presets ----------
+const EXPS = {};
+function indexSettings() {
+  for (const k in EXPS) delete EXPS[k];
+  for (const name of Object.keys(SETTINGS)) {
+    const i = name.lastIndexOf("_"); if (i < 0) continue;
+    (EXPS[name.slice(0, i)] = EXPS[name.slice(0, i)] || []).push(name.slice(i + 1));
+  }
+  const ex = $("ta-exp"), cur = ex.value;
+  ex.innerHTML = "";
+  for (const e of Object.keys(EXPS).sort()) ex.add(new Option(e, e));
+  if (cur && EXPS[cur]) ex.value = cur;
+  fillTP();
+}
+function fillTP(want) {
+  const tp = $("ta-tp"), list = (EXPS[$("ta-exp").value] || []).slice().sort();
+  tp.innerHTML = ""; for (const t of list) tp.add(new Option(t, t));
+  if (want && list.includes(want)) tp.value = want;
+}
+function base() { return IMG.name ? IMG.name.replace(/\.[^.]*$/, "") : ""; }
+function updateStem() { if (IMG.name) $("ta-stem").value = `${base()}_${$("ta-exp").value}_${$("ta-tp").value}`; }
+function loadSettings(quiet) {
+  const exp = $("ta-exp").value, tp = $("ta-tp").value, text = SETTINGS[`${exp}_${tp}`];
+  if (text === undefined) { LOS.toast(`No settings file ${exp}_${tp}.txt.`, "warn"); return; }
+  pull();
+  const { label, notes } = readSettings(text, S);
+  push(); updateStem(); UI.exp = exp; UI.tp = tp;
+  V.fit = true; changed(true);
+  const { fatal, warn } = validate(S);
+  if (!quiet) {
+    const msg = `${exp} / ${tp}${label ? ` [${label}]` : ""} loaded` + (fatal.length || warn.length || notes.length ? " - " + [...notes, ...fatal, ...warn].join("  ") : "");
+    LOS.toast(msg, fatal.length ? "bad" : warn.length || notes.length ? "warn" : "good");
+  }
+}
+
+// ---------- image ----------
+function setImage(data, w, h, name) {
+  IMG.data = data; IMG.w = w; IMG.h = h; IMG.name = name;
+  let lo = Infinity, hi = -Infinity;
+  for (let i = 0; i < data.length; i++) { const v = data[i]; if (v < lo) lo = v; if (v > hi) hi = v; }
+  IMG.lo = lo; IMG.hi = hi;
+  // display copy: block-averaged when the scan is too big for one canvas on a phone
+  const k = Math.max(1, Math.ceil(Math.sqrt(w * h / 16e6)));
+  IMG.k = k; IMG.sw = Math.ceil(w / k); IMG.sh = Math.ceil(h / k);
+  if (k === 1) IMG.small = data;
+  else {
+    const sm = new Float32Array(IMG.sw * IMG.sh);
+    for (let j = 0; j < IMG.sh; j++) for (let i = 0; i < IMG.sw; i++) {
+      let s = 0, c = 0;
+      for (let y = j * k; y < Math.min(h, j * k + k); y++) for (let x = i * k; x < Math.min(w, i * k + k); x++) { s += data[y * w + x]; c++; }
+      sm[j * IMG.sw + i] = s / c;
+    }
+    IMG.small = sm;
+  }
+  IMG.offKey = "";
+  fCmin.setRange(lo, hi); fCmax.setRange(lo, hi);
+  R = null; $("ta-results").classList.add("hidden");
+}
+function colourImage() {
+  const key = `${S.cmap}|${S.c_min}|${S.c_max}|${IMG.name}|${IMG.w}`;
+  if (IMG.off && IMG.offKey === key) return IMG.off;
+  const { sw, sh, small } = IMG;
+  if (!IMG.off) IMG.off = document.createElement("canvas");
+  const off = IMG.off; off.width = sw; off.height = sh;
+  const oc = off.getContext("2d"), id = oc.createImageData(sw, sh), L8 = LOS.lut(S.cmap), px = id.data;
+  const lo = Math.min(S.c_min, S.c_max), hi = Math.max(S.c_min, S.c_max), span = hi - lo;
+  for (let i = 0; i < sw * sh; i++) {
+    const v = small[i], o = i * 4;
+    if (Number.isNaN(v)) { px[o + 3] = 0; continue; }
+    const t = span > 0 ? (v - lo) / span : 0, c = (t <= 0 ? 0 : t >= 1 ? 255 : Math.min(255, Math.floor(t * 256))) * 3;
+    px[o] = L8[c]; px[o + 1] = L8[c + 1]; px[o + 2] = L8[c + 2]; px[o + 3] = 255;
+  }
+  oc.putImageData(id, 0, 0);
+  IMG.offKey = key;
+  return off;
+}
+
+// ---------- image plate view (pan: drag · zoom: wheel / pinch · double-click: fit) ----------
+const V = { fit: true, s: 1, cx: 0, cy: 0, L: null, drag: null };
+const extents = () => { const r = S.resolution * 1e-3; return { x0: r - S.x_zp - r / 2, x1: IMG.w * r - S.x_zp + r / 2, y0: r - S.y_zp - r / 2, y1: IMG.h * r - S.y_zp + r / 2, r }; };
+const arangeE = (a, b, step = 0.1) => { const n = Math.max(0, Math.ceil((b + step / 2 - a) / step)), out = []; for (let i = 0; i < n; i++) out.push(a + i * step); return out; };   // geo.trace() energies
+function drawImg() {
+  const cv = $("ta-img"); if (!cv.clientWidth) return;
+  const { ctx, w: W, h: H } = LOS.fitCanvas(cv), T = LOS.theme;
+  ctx.fillStyle = T.card; ctx.fillRect(0, 0, W, H);
+  if (!IMG.data) {
+    ctx.textAlign = "center"; ctx.fillStyle = T.sub; ctx.font = `600 14px ${T.body}`; ctx.fillText("No scan loaded", W / 2, H / 2 - 8);
+    ctx.font = `12px ${T.body}`; ctx.fillText("Load an image plate scan to begin", W / 2, H / 2 + 14); return;
+  }
+  const m = { l: 62, r: 84, t: 30, b: 44 }, pw = Math.max(20, W - m.l - m.r), ph = Math.max(20, H - m.t - m.b);
+  const ex = extents();
+  if (V.fit) { V.s = Math.min(pw / (ex.x1 - ex.x0), ph / (ex.y1 - ex.y0)); V.cx = (ex.x0 + ex.x1) / 2; V.cy = (ex.y0 + ex.y1) / 2; }
+  V.L = { m, pw, ph };
+  const X = u => m.l + pw / 2 + (u - V.cx) * V.s, Y = v => m.t + ph / 2 + (v - V.cy) * V.s;
+  const u0 = V.cx - pw / 2 / V.s, u1 = V.cx + pw / 2 / V.s, v0 = V.cy - ph / 2 / V.s, v1 = V.cy + ph / 2 / V.s;
+  ctx.save(); ctx.beginPath(); ctx.rect(m.l, m.t, pw, ph); ctx.clip();
+  ctx.fillStyle = T.tile; ctx.fillRect(m.l, m.t, pw, ph);
+  // scan (only the visible part, so deep zooms stay fast)
+  const off = colourImage(), blk = IMG.k * ex.r;
+  const i0 = Math.max(0, Math.floor((u0 - ex.x0) / blk)), i1 = Math.min(off.width, Math.ceil((u1 - ex.x0) / blk));
+  const j0 = Math.max(0, Math.floor((v0 - ex.y0) / blk)), j1 = Math.min(off.height, Math.ceil((v1 - ex.y0) / blk));
+  if (i1 > i0 && j1 > j0) {
+    ctx.imageSmoothingEnabled = blk * V.s < 1;
+    ctx.drawImage(off, i0, j0, i1 - i0, j1 - j0, X(ex.x0 + i0 * blk), Y(ex.y0 + j0 * blk), (i1 - i0) * blk * V.s, (j1 - j0) * blk * V.s);
+  }
+  const th = S.angle * (Math.PI / 180), c = Math.cos(th), s = Math.sin(th);
+  const poly = (xs, ys, col, lw, dash) => {
+    ctx.strokeStyle = col; ctx.lineWidth = lw; ctx.setLineDash(dash || []); ctx.beginPath();
+    let pen = false;
+    for (let i = 0; i < xs.length; i++) { if (!Number.isFinite(xs[i]) || !Number.isFinite(ys[i])) { pen = false; continue; } const px = X(xs[i]), py = Y(ys[i]); if (pen) ctx.lineTo(px, py); else { ctx.moveTo(px, py); pen = true; } }
+    ctx.stroke(); ctx.setLineDash([]);
+  };
+  if ($("ta-sh-axes").checked) { poly([-100 * c, 100 * c], [-100 * s, 100 * s], "#000", 2); poly([100 * s, -100 * s], [-100 * c, 100 * c], "#000", 2); }
+  if ($("ta-sh-tr").checked) {
+    const geo = new Geo(S), width = S.trace_width * ex.r;
+    for (const sp of S.species) {
+      if (!sp.show) continue;
+      const xp = [], yp = [];
+      for (const en of arangeE(sp.e_min, sp.e_max)) { const [x, y] = geo.defl(sp.A, sp.Z, en); xp.push(x * c - y * s); yp.push(y * c + x * s); }
+      const col = HEX[sp.colour] || HEX.r, sh = d => xp.map(v => v + d);
+      if (width) { poly(xp, yp, col, 1.2); poly(sh(-width / 2), yp, col, 1.2); poly(sh(width / 2), yp, col, 1.2); }
+      else poly(xp, yp, col, 1.6, [5, 3]);
+      if (S.bg_left) { const d = S.bg_left_px * ex.r; poly(sh(-width / 2 - d), yp, col, 1.2, [7, 3, 1.5, 3]); poly(sh(-3 * width / 2 - d), yp, col, 1.2, [7, 3, 1.5, 3]); }
+      if (S.bg_right) { const d = S.bg_right_px * ex.r; poly(sh(width / 2 + d), yp, col, 1.2, [7, 3, 1.5, 3]); poly(sh(3 * width / 2 + d), yp, col, 1.2, [7, 3, 1.5, 3]); }
+      if (S.det_threshold) poly(sh(S.det_threshold_mm), yp, col, 1.6, [1.5, 2.5]);
+    }
+  }
+  if ($("ta-sh-fl").checked) {
+    for (const fb of S.filters) {
+      const y1 = Math.min(fb.y1, fb.y2), y2 = Math.max(fb.y1, fb.y2);
+      if (!(y1 <= v0 && y2 >= v1)) { ctx.fillStyle = "rgba(255,255,255,0.10)"; const a = Y(y1), b = Y(y2); ctx.fillRect(m.l, a, pw, b - a); }
+      for (const yy of [y1, y2]) {
+        const py = Y(yy);
+        ctx.strokeStyle = "rgba(255,255,255,0.9)"; ctx.lineWidth = 2.6; ctx.beginPath(); ctx.moveTo(m.l, py); ctx.lineTo(m.l + pw, py); ctx.stroke();
+        ctx.strokeStyle = "#000"; ctx.lineWidth = 1; ctx.setLineDash([5, 3]); ctx.beginPath(); ctx.moveTo(m.l, py); ctx.lineTo(m.l + pw, py); ctx.stroke(); ctx.setLineDash([]);
+      }
+      const ym = Y(0.5 * (y1 + y2));
+      if (ym > m.t - 20 && ym < m.t + ph + 20) {
+        ctx.font = `11px ${T.body}`; const tw = ctx.measureText(fb.name).width, bx = m.l + 0.012 * pw;
+        ctx.fillStyle = "rgba(0,0,0,0.55)"; ctx.beginPath(); ctx.roundRect ? ctx.roundRect(bx, ym - 9, tw + 10, 18, 4) : ctx.rect(bx, ym - 9, tw + 10, 18); ctx.fill();
+        ctx.fillStyle = "#fff"; ctx.textAlign = "left"; ctx.textBaseline = "middle"; ctx.fillText(fb.name, bx + 5, ym);
+      }
+    }
+  }
+  ctx.restore();
+  // frame, ticks, labels
+  ctx.strokeStyle = T.sub; ctx.lineWidth = 1; ctx.strokeRect(m.l + 0.5, m.t + 0.5, pw - 1, ph - 1);
+  const nx = Math.max(3, Math.round(pw / 85)), ny = Math.max(3, Math.round(ph / 60));
+  const xt = LOS.ticks(u0, u1, nx), yt = LOS.ticks(v0, v1, ny), xs = LOS.niceStep(u1 - u0, nx), ys = LOS.niceStep(v1 - v0, ny);
+  ctx.fillStyle = T.sub; ctx.font = `11px ${T.mono}`; ctx.textAlign = "center"; ctx.textBaseline = "top";
+  for (const t of xt) { const x = X(t); ctx.beginPath(); ctx.moveTo(x, m.t + ph); ctx.lineTo(x, m.t + ph + 4); ctx.stroke(); ctx.fillText(LOS.tickFmt(t, xs), x, m.t + ph + 6); }
+  ctx.textAlign = "right"; ctx.textBaseline = "middle";
+  for (const t of yt) { const y = Y(t); ctx.beginPath(); ctx.moveTo(m.l - 4, y); ctx.lineTo(m.l, y); ctx.stroke(); ctx.fillText(LOS.tickFmt(t, ys), m.l - 6, y); }
+  ctx.fillStyle = T.text; ctx.font = `600 12px ${T.body}`; ctx.textAlign = "center"; ctx.textBaseline = "bottom";
+  ctx.fillText("x (mm)", m.l + pw / 2, H - 4);
+  ctx.fillText(IMG.name.length > 90 ? IMG.name.slice(0, 88) + "…" : IMG.name, m.l + pw / 2, m.t - 9);
+  ctx.save(); ctx.translate(14, m.t + ph / 2); ctx.rotate(-Math.PI / 2); ctx.textBaseline = "middle"; ctx.fillText("y (mm)", 0, 0); ctx.restore();
+  // colour bar
+  const lo = Math.min(S.c_min, S.c_max), hi = Math.max(S.c_min, S.c_max), L8 = LOS.lut(S.cmap), bx = m.l + pw + 14, bw = 13;
+  const grad = ctx.createLinearGradient(0, m.t + ph, 0, m.t);
+  for (let k = 0; k <= 16; k++) { const q = Math.round(k / 16 * 255) * 3; grad.addColorStop(k / 16, `rgb(${L8[q]},${L8[q + 1]},${L8[q + 2]})`); }
+  ctx.fillStyle = grad; ctx.fillRect(bx, m.t, bw, ph); ctx.strokeStyle = T.sub; ctx.strokeRect(bx + 0.5, m.t + 0.5, bw - 1, ph - 1);
+  if (hi > lo) {
+    const ct = LOS.ticks(lo, hi, 6), cs = LOS.niceStep(hi - lo, 6);
+    ctx.fillStyle = T.sub; ctx.font = `11px ${T.mono}`; ctx.textAlign = "left"; ctx.textBaseline = "middle";
+    for (const t of ct) ctx.fillText(LOS.tickFmt(t, cs), bx + bw + 4, m.t + ph - (t - lo) / (hi - lo) * ph);
+  }
+  ctx.save(); ctx.translate(W - 8, m.t + ph / 2); ctx.rotate(-Math.PI / 2); ctx.fillStyle = T.text; ctx.font = `600 12px ${T.body}`; ctx.textAlign = "center"; ctx.fillText("PSL", 0, 0); ctx.restore();
+}
+const toData = (cv, ev) => {
+  const b = cv.getBoundingClientRect(), L = V.L; if (!L) return null;
+  const px = ev.clientX - b.left, py = ev.clientY - b.top;
+  return { px, py, inside: px >= L.m.l && px <= L.m.l + L.pw && py >= L.m.t && py <= L.m.t + L.ph,
+    u: V.cx + (px - (L.m.l + L.pw / 2)) / V.s, v: V.cy + (py - (L.m.t + L.ph / 2)) / V.s };
+};
+function readout(d) {
+  const el = $("ta-read");
+  if (!d || !d.inside || !IMG.data) { el.textContent = UI.pick ? pickHint() : ""; return; }
+  const ix = pyRound((d.u + S.x_zp) * 1e3 / S.resolution) - 1, iy = pyRound((d.v + S.y_zp) * 1e3 / S.resolution) - 1;
+  let t = `x = ${d.u.toFixed(2).padStart(7)} mm    y = ${d.v.toFixed(2).padStart(7)} mm`;
+  if (iy >= 0 && iy < IMG.h && ix >= 0 && ix < IMG.w) t += `    PSL = ${pyG(IMG.data[iy * IMG.w + ix], 4)}`;
+  el.textContent = t;
+}
+const pickHint = () => ({ zp: "Click the zero point on the image.", filter: "Click the new y position for the selected filter box.", shift: "Click the new position of the selected filter edge." }[UI.pick] || "");
+function setPick(mode) {
+  UI.pick = UI.pick === mode ? null : mode;
+  for (const [id, m] of [["ta-pick-zp", "zp"], ["ta-pick-f", "filter"], ["ta-shift-f", "shift"]]) $(id).setAttribute("aria-pressed", UI.pick === m ? "true" : "false");
+  $("ta-img").classList.toggle("pick", !!UI.pick);
+  $("ta-read").textContent = pickHint();
+  if (UI.pick && UI.tab !== "img") setTab("img");
+}
+function onPick(u, v) {
+  if (UI.pick === "zp") {
+    pull();
+    S.x_zp = +pyG(S.x_zp + u); S.y_zp = +pyG(S.y_zp + v);
+    $("ta-xzp").value = pyG(S.x_zp); $("ta-yzp").value = pyG(S.y_zp);
+    setPick("zp"); V.fit = true; changed(true); return;
+  }
+  const sel = UI.sel;
+  if (!sel || !S.filters[sel.row]) { LOS.toast("Select a y1 or y2 box in the filter table first.", "warn"); return; }
+  if (UI.pick === "filter") { S.filters[sel.row][sel.col] = +pyG(v); setPick("filter"); }
+  else { const dy = v - S.filters[sel.row][sel.col]; for (const fb of S.filters) { fb.y1 = +pyG(fb.y1 + dy); fb.y2 = +pyG(fb.y2 + dy); } setPick("shift"); }
+  fillFilters(); changed();
+}
+(function wireCanvas() {
+  const cv = $("ta-img");
+  cv.addEventListener("pointerdown", ev => {
+    if (!IMG.data || ev.button > 0) return;
+    cv.setPointerCapture(ev.pointerId);
+    V.drag = { id: ev.pointerId, x: ev.clientX, y: ev.clientY, cx: V.cx, cy: V.cy, moved: false };
+  });
+  cv.addEventListener("pointermove", ev => {
+    const d = toData(cv, ev);
+    if (V.drag && V.drag.id === ev.pointerId) {
+      const dx = ev.clientX - V.drag.x, dy = ev.clientY - V.drag.y;
+      if (!V.drag.moved && Math.hypot(dx, dy) > 4) { V.drag.moved = true; cv.classList.add("grabbing"); }
+      if (V.drag.moved) { V.fit = false; V.cx = V.drag.cx - dx / V.s; V.cy = V.drag.cy - dy / V.s; drawImg(); }
+    }
+    readout(d);
+  });
+  const up = ev => {
+    if (!V.drag || V.drag.id !== ev.pointerId) return;
+    const wasClick = !V.drag.moved && ev.type === "pointerup";
+    V.drag = null; cv.classList.remove("grabbing");
+    if (wasClick && UI.pick) { const d = toData(cv, ev); if (d && d.inside) onPick(d.u, d.v); }
+  };
+  cv.addEventListener("pointerup", up); cv.addEventListener("pointercancel", up);
+  cv.addEventListener("pointerleave", () => readout(null));
+  cv.addEventListener("wheel", ev => {
+    if (!IMG.data || !V.L) return;
+    ev.preventDefault();
+    const d = toData(cv, ev), f = Math.exp(-ev.deltaY * 0.0015), L = V.L;
+    const ns = Math.max(1e-3, Math.min(V.s * f, 2000));
+    const ax = d.px - (L.m.l + L.pw / 2), ay = d.py - (L.m.t + L.ph / 2);
+    V.cx = d.u - ax / ns; V.cy = d.v - ay / ns; V.s = ns; V.fit = false; drawImg();
+  }, { passive: false });
+  cv.addEventListener("dblclick", () => { V.fit = true; drawImg(); });
+})();
+
+// ---------- spectra plot ----------
+function drawSpec() {
+  const cv = $("ta-spec"); if (!cv.clientWidth) return;
+  const T = LOS.theme;
+  const series = [];
+  if (R) for (const r of R.results) {
+    const xs = [], ys = [], nx = [], ny = [];
+    for (let i = 0; i < r.res.E.length; i++) {
+      if (r.res.dNdEsr[i] > 0) { xs.push(r.res.E[i]); ys.push(r.res.dNdEsr[i]); }
+      if (r.res.noise && r.res.noise[i] > 0) { nx.push(r.res.E[i]); ny.push(r.res.noise[i]); }
+    }
+    series.push({ xs, ys, col: chartCol(r.sp.colour), label: `M=${pyG(r.sp.A)}, Z=${pyG(r.sp.Z)}` });
+    if (r.res.noise) series.push({ xs: nx, ys: ny, col: chartCol(r.sp.colour), label: `M=${pyG(r.sp.A)}, Z=${pyG(r.sp.Z)} (noise)`, dash: [7, 3, 1.5, 3], width: 1.2 });
+  }
+  const all = series.flatMap(s => s.xs.map((x, i) => [x, s.ys[i]]));
+  if (!all.length) {
+    const { ctx, w, h } = LOS.fitCanvas(cv); ctx.fillStyle = T.card; ctx.fillRect(0, 0, w, h);
+    ctx.fillStyle = T.sub; ctx.font = `13px ${T.body}`; ctx.textAlign = "center"; ctx.fillText(R ? "No positive dN/dE/dΩ to plot" : "Get spectra to see them here", w / 2, h / 2); return;
+  }
+  let x0 = Infinity, x1 = -Infinity, y0 = Infinity, y1 = -Infinity;
+  for (const [x, y] of all) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); }
+  if (!(x1 > x0)) { x0 -= 1; x1 += 1; }
+  if (!(y1 > y0)) { y0 /= 10; y1 *= 10; }
+  const pad = Math.pow(y1 / y0, 0.03);
+  const ch = LOS.chart(cv, { x: { min: x0, max: x1, label: "E (MeV/u)" }, y: { min: y0 / pad, max: y1 * pad, log: true, label: "dN/dE/dΩ  (#/(MeV/n)/sr)" }, ml: 72 });
+  V.spec = { ch, x0, x1, y0: y0 / pad, y1: y1 * pad };
+  ch.clip();
+  for (const s of series) ch.line(s.xs, s.ys, { color: s.col, width: s.width || 1.8, dash: s.dash });
+  ch.unclip();
+  ch.legend(series.map(s => ({ label: s.label, color: s.col, dash: s.dash, width: s.width || 1.8 })), "tr");
+}
+$("ta-spec").addEventListener("pointermove", ev => {
+  const sp = V.spec; if (!sp || !R) return;
+  const b = ev.currentTarget.getBoundingClientRect(), px = ev.clientX - b.left, py = ev.clientY - b.top, { m, pw, ph } = sp.ch;
+  if (px < m.l || px > m.l + pw || py < m.t || py > m.t + ph) { $("ta-read").textContent = ""; return; }
+  const E = sp.x0 + (px - m.l) / pw * (sp.x1 - sp.x0), y = Math.pow(10, Math.log10(sp.y0) + (m.t + ph - py) / ph * (Math.log10(sp.y1) - Math.log10(sp.y0)));
+  $("ta-read").textContent = `E = ${E.toFixed(3).padStart(7)} MeV/n    dN/dE/dΩ = ${y.toExponential(3)}`;
+});
+$("ta-spec").addEventListener("pointerleave", () => { $("ta-read").textContent = ""; });
+
+// ---------- ion range tool (ionenergyout.m + ionoutplot.m) ----------
+let ionScan = null;
+function ionPoint() {
+  const ion = $("ta-ion-ion").value, mat = $("ta-ion-mat").value, eIn = num($("ta-ion-e").value, 0), d = num($("ta-ion-d").value, 0), step = Math.max(num($("ta-ion-s").value, 0.01), 1e-4);
+  let eo;
+  try { eo = energyOut(ion, eIn, d, mat, step); } catch (err) { $("ta-ion-out").textContent = err.message; return; }
+  if (eo <= 0) { const r = ionRange(ion, eIn, mat, step); $("ta-ion-out").textContent = `Stopped in the slab - projected range ${Number.isFinite(r) ? r.toFixed(2) : "inf"} µm of ${mat}`; }
+  else $("ta-ion-out").textContent = `E out = ${eo.toFixed(4)} MeV/u  (${(eo * ION_A[ion]).toFixed(3)} MeV total) after ${pyG(d)} µm ${mat}`;
+}
+function ionDoScan() {
+  const ion = $("ta-ion-ion").value, mat = $("ta-ion-mat").value, eMax = num($("ta-ion-e").value, 0), d = num($("ta-ion-d").value, 0), step = Math.max(num($("ta-ion-s").value, 0.01), 1e-3);
+  const eIn = []; for (let i = 1; i < 400; i++) eIn.push(i === 399 ? eMax : i * (eMax / 399));
+  let eOut;
+  try { eOut = energyOut(ion, eIn, d, mat, step); } catch (err) { $("ta-ion-out").textContent = err.message; return; }
+  ionScan = { eIn, eOut: [...eOut], title: `${ion} through ${pyG(d)} µm of ${mat}` };
+  const k = eOut.findIndex(v => v > 0);
+  $("ta-ion-out").textContent = k >= 0 ? `Transmission cut-off ~ ${eIn[k].toFixed(3)} MeV/u` : "Nothing transmitted";
+  drawIon();
+}
+function drawIon() {
+  const cv = $("ta-ion"); if (!cv.clientWidth) return;
+  const T = LOS.theme;
+  if (!ionScan || !(ionScan.eIn[ionScan.eIn.length - 1] > 0)) {
+    const { ctx, w, h } = LOS.fitCanvas(cv); ctx.fillStyle = T.card; ctx.fillRect(0, 0, w, h);
+    ctx.fillStyle = T.sub; ctx.font = `13px ${T.body}`; ctx.textAlign = "center"; ctx.fillText("Scan 0 – E to plot energy out against energy in", w / 2, h / 2); return;
+  }
+  const xm = ionScan.eIn[ionScan.eIn.length - 1], ym = Math.max(...ionScan.eOut, 1e-9);
+  const ch = LOS.chart(cv, { x: { min: 0, max: xm, label: "Energy in (MeV/u)" }, y: { min: 0, max: ym * 1.05, label: "Energy out (MeV/u)" } });
+  ch.clip(); ch.line(ionScan.eIn, ionScan.eOut, { color: T.accent, width: 2 }); ch.unclip();
+  ch.ctx.fillStyle = T.text; ch.ctx.font = `600 12px ${T.body}`; ch.ctx.textAlign = "left"; ch.ctx.textBaseline = "top"; ch.ctx.fillText(ionScan.title, ch.m.l + 10, ch.m.t + 8);
+}
+
+// ---------- tabs + redraw ----------
+function setTab(t) {
+  UI.tab = t;
+  for (const k of ["img", "spec", "ion"]) { $(`ta-tab-${k}`).setAttribute("aria-pressed", k === t ? "true" : "false"); $(`ta-p-${k}`).hidden = k !== t; }
+  $("ta-reset").classList.toggle("hidden", t !== "img");
+  $("ta-read").textContent = t === "img" ? pickHint() : "";
+  if (t === "img") drawImg(); else if (t === "spec") drawSpec(); else drawIon();
+}
+let raf = 0;
+function changed(now) {
+  pull();
+  if (now) { cancelAnimationFrame(raf); raf = 0; drawImg(); return; }
+  if (!raf) raf = requestAnimationFrame(() => { raf = 0; drawImg(); });
+}
+
+// ---------- Get spectra + files ----------
+function getSpectra() {
+  if (!IMG.data) { LOS.toast("Load an image first.", "warn"); return; }
+  pull();
+  if (!$("ta-sh-tr").checked) { LOS.toast("Traces are hidden - only shown traces are analysed.", "warn"); return; }
+  if (S.trace_width < 2) { LOS.toast("The trace must be at least 2 pixels thick.", "warn"); return; }
+  const shown = S.species.filter(s => s.show);
+  if (!shown.length) { LOS.toast("No species selected.", "warn"); return; }
+  const { fatal, warn } = validate(S);
+  if (fatal.length) { LOS.toast(fatal.join(" "), "bad"); return; }
+  const stem = ($("ta-stem").value.trim() || base() || "spectrum").split(/[\\/]/).pop();
+  const results = [], errors = [];
+  for (const sp of shown) {
+    try {
+      const res = extractSpectrum(IMG, S, sp);
+      results.push({ sp: { ...sp }, res, fname: `${stem}_M${pyG(sp.A)}_Z${pyG(sp.Z)}.txt`, text: spectrumText(res) });
+    } catch (err) { errors.push(`M=${pyG(sp.A)} Z=${pyG(sp.Z)}: ${err.message}`); }
+  }
+  R = { results, stem, params: paramsFile() };
+  const body = $("ta-res-body"); body.innerHTML = "";
+  results.forEach((r, i) => {
+    const tr = document.createElement("tr"), E = r.res.E;
+    tr.innerHTML = `<td><span class="dot" style="background:${chartCol(r.sp.colour)}"></span>M=${pyG(r.sp.A)}, Z=${pyG(r.sp.Z)}</td><td class="num">${E[0].toFixed(2)} – ${E[E.length - 1].toFixed(2)}</td><td class="num">${E.length}</td><td class="fname">${LOS.esc(r.fname)}</td><td><button class="btn secondary small" type="button" data-i="${i}">Save</button></td>`;
+    body.append(tr);
+  });
+  $("ta-results").classList.toggle("hidden", !results.length);
+  setTab("spec");
+  if (errors.length) LOS.toast(errors.join("  "), "bad");
+  else LOS.toast(`${results.length} spectr${results.length === 1 ? "um" : "a"} ready.` + (warn.length ? " " + warn.join(" ") : ""), warn.length ? "warn" : "good");
+}
+$("ta-res-body").addEventListener("click", ev => {
+  const b = ev.target.closest("button[data-i]"); if (!b || !R) return;
+  const r = R.results[+b.dataset.i]; LOS.save(r.fname, r.text, `Saved ${r.fname}.`);
+});
+function paramsFile() {   // _param_path(): <scan>_<experiment>_<TP>.json
+  pull();
+  return { name: `${base() || "untitled"}_${$("ta-exp").value}_${$("ta-tp").value}.json`, text: pyJSON(stateDict(S)) };
+}
+
+// ---------- example scan (synthetic, Apollon 2025 TP normal geometry) so the app opens in a working state ----------
+function exampleScan() {
+  const st = DEF();
+  readSettings(SETTINGS.Apollon2025_TPnormal || "", st);
+  Object.assign(st, { e_field: 20.3, e_sign: -1, x_zp: 62.0, y_zp: 5.0, angle: -1.5, trace_width: 20.0, bg_right: true, det_threshold: true, det_threshold_mm: 3.0,
+    fading: true, fading_time: 40.0, calibration: true, c_min: 0.0, c_max: 0.12,
+    species: [{ A: 1.0, Z: 1.0, e_min: 15.0, e_max: 60.0, show: true, colour: "r" }, { A: 12.0, Z: 6.0, e_min: 4.0, e_max: 40.0, show: true, colour: "g" }] });
+  const w = 1400, h = 1500, r = st.resolution * 1e-3, data = new Float32Array(w * h), geo = new Geo(st);
+  let seed = 20250611; const rnd = () => ((seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff);
+  const gauss = () => Math.sqrt(-2 * Math.log(Math.max(rnd(), 1e-12))) * Math.cos(2 * Math.PI * rnd());
+  for (let i = 0; i < w * h; i++) data[i] = 0.004 + 0.0012 * gauss();
+  const th = st.angle * Math.PI / 180, c = Math.cos(th), s = Math.sin(th);
+  const blob = (col, row, amp, sig) => {
+    const R0 = Math.ceil(3.5 * sig);
+    for (let y = Math.max(0, Math.round(row) - R0); y <= Math.min(h - 1, Math.round(row) + R0); y++)
+      for (let x = Math.max(0, Math.round(col) - R0); x <= Math.min(w - 1, Math.round(col) + R0); x++)
+        data[y * w + x] += amp * Math.exp(-((x - col) ** 2 + (y - row) ** 2) / (2 * sig * sig));
+  };
+  blob(st.x_zp / r - 1, st.y_zp / r - 1, 0.5, 4.5);   // zero order
+  const species = [[1, 1, 0.07, 14.0, 52], [12, 6, 0.11, 7.5, 31], [12, 5, 0.055, 6.5, 24], [12, 4, 0.03, 5.5, 18]];   // A, Z, amplitude, kT (MeV/n), cut-off (MeV/n)
+  for (const [A, Z, amp, kT, cut] of species) {
+    const zoa = Z / A, yTop = geo.pos(cut * 1.15, zoa);
+    for (let yy = yTop; yy < h * r; yy += r / 4) {
+      const en = geo.energy(yy, zoa), [x, y] = geo.defl(A, Z, en);
+      const xp = x * c - y * s, yp = y * c + x * s, col = (xp + st.x_zp) / r - 1, row = (yp + st.y_zp) / r - 1;
+      if (row < 0 || row >= h || col < -10 || col > w + 10) continue;
+      const a = amp * Math.exp(-en / kT) * 4.5 / (1 + Math.exp((en - cut) / (0.04 * cut))) * (1 + 0.15 * gauss());
+      const sig = 3.2, R0 = 11, iy = Math.round(row);
+      for (let dx = -R0; dx <= R0; dx++) { const ix = Math.round(col) + dx; if (ix >= 0 && ix < w) data[iy * w + ix] += a / 4 * Math.exp(-((ix - col) ** 2) / (2 * sig * sig)); }
+    }
+  }
+  for (let i = 0; i < w * h; i++) if (data[i] < 0) data[i] = 0;
+  return { st, data, w, h };
+}
+
+// ---------- wiring ----------
+$("ta-exp").addEventListener("change", () => { fillTP(); });
+$("ta-loadset").addEventListener("click", () => loadSettings(false));
+$("ta-setfile-btn").addEventListener("click", () => $("ta-setfile").click());
+$("ta-setfile").addEventListener("change", async ev => {
+  const f = ev.target.files && ev.target.files[0]; ev.target.value = ""; if (!f) return;
+  const stem = f.name.replace(/\.[^.]*$/, ""), text = await f.text();
+  SETTINGS[stem] = text; indexSettings();
+  const i = stem.lastIndexOf("_");
+  if (i > 0) { $("ta-exp").value = stem.slice(0, i); fillTP(stem.slice(i + 1)); loadSettings(false); }
+  else {   // no <experiment>_<TP> name: apply it anyway
+    pull(); const { label, notes } = readSettings(text, S); push(); V.fit = true; changed(true);
+    LOS.toast(`${f.name}${label ? ` [${label}]` : ""} loaded` + (notes.length ? " - " + notes.join(" ") : ""), notes.length ? "warn" : "good");
+  }
+});
+async function loadScan(file) {
+  const ext = file.name.toLowerCase().split(".").pop();
+  if (!["tif", "tiff", "png"].includes(ext)) { LOS.toast("Use a TIFF scan (PNG also works).", "warn"); return; }
+  LOS.toast(`Reading ${file.name}…`);
+  try {
+    const img = await LOS.readImage(file, "mean");
+    pull();
+    setImage(img.data, img.w, img.h, file.name);
+    S.c_min = IMG.lo; S.c_max = IMG.hi;
+    fCmin.set(+pyG(IMG.lo), true); fCmax.set(+pyG(IMG.hi), true);
+    updateStem(); V.fit = true; changed(true);
+    $("ta-name").textContent = `${file.name}   ${img.w} × ${img.h} px   PSL range ${pyG(IMG.lo)} – ${pyG(IMG.hi)}`;
+    if (UI.tab !== "img") setTab("img");
+    LOS.toast(`Loaded ${file.name} (${img.w} × ${img.h} px, ${img.bps}-bit).`, "good");
+  } catch (err) { LOS.toast(`Couldn't read ${file.name}: ${err.message || err}`, "bad"); }
+}
+$("ta-load").addEventListener("click", () => $("ta-file").click());
+$("ta-file").addEventListener("change", ev => { const f = ev.target.files && ev.target.files[0]; ev.target.value = ""; if (f) loadScan(f); });
+const view = $("view-tpa");
+view.addEventListener("dragover", ev => { ev.preventDefault(); view.classList.add("drop-on"); });
+view.addEventListener("dragleave", ev => { if (!view.contains(ev.relatedTarget)) view.classList.remove("drop-on"); });
+view.addEventListener("drop", ev => {
+  ev.preventDefault(); view.classList.remove("drop-on");
+  const f = ev.dataTransfer.files && ev.dataTransfer.files[0]; if (!f) return;
+  if (/\.json$/i.test(f.name)) loadParams(f); else loadScan(f);
+});
+for (const [, id] of NUM) $(id).addEventListener("input", () => changed());
+for (const [, id] of CHK) $(id).addEventListener("change", () => changed());
+for (const f of [fAng, fCmin, fCmax]) f.onChange(() => changed());
+$("ta-cmap").addEventListener("change", () => changed());
+for (const id of ["ta-sh-axes", "ta-sh-tr", "ta-sh-fl"]) $(id).addEventListener("change", () => changed());
+for (const id of ["ta-es", "ta-bs"]) $(id).addEventListener("click", () => {
+  const b = $(id), on = b.getAttribute("aria-pressed") !== "true";
+  b.setAttribute("aria-pressed", on ? "true" : "false"); b.textContent = on ? "−" : "+"; changed();
+});
+// E field fine steps; hold to sweep
+for (const [id, d] of [["ta-edn", -1], ["ta-eup", +1]]) {
+  const b = $(id); let t1 = 0, t2 = 0;
+  const nudge = () => { const step = Math.abs(num($("ta-estep").value, 0.1)); if (!step) return; $("ta-ef").value = pyG(num($("ta-ef").value, 0) + d * step); changed(); };
+  const stop = () => { clearTimeout(t1); clearInterval(t2); };
+  b.addEventListener("pointerdown", ev => { if (ev.button > 0) return; ev.preventDefault(); nudge(); stop(); t1 = setTimeout(() => { t2 = setInterval(nudge, 90); }, 350); });
+  for (const e of ["pointerup", "pointerleave", "pointercancel"]) b.addEventListener(e, stop);
+  b.addEventListener("click", ev => { if (ev.detail === 0) nudge(); });   // keyboard
+}
+$("ta-pick-zp").addEventListener("click", () => setPick("zp"));
+$("ta-pick-f").addEventListener("click", () => setPick("filter"));
+$("ta-shift-f").addEventListener("click", () => setPick("shift"));
+$("ta-sp-add").addEventListener("click", () => { S.species.push({ A: 1.0, Z: 1.0, e_min: 1.0, e_max: 100.0, show: true, colour: "r" }); fillSpecies(); changed(); });
+$("ta-fl-add").addEventListener("click", () => { S.filters.push({ y1: 0.0, y2: 0.0, name: "NoFilter" }); fillFilters(); changed(); });
+$("ta-get").addEventListener("click", getSpectra);
+$("ta-psave").addEventListener("click", () => { const p = paramsFile(); LOS.save(p.name, p.text, `Parameters saved as ${p.name}.`); });
+$("ta-pload").addEventListener("click", () => $("ta-pfile").click());
+async function loadParams(f) {
+  try {
+    S = fromDict(JSON.parse(await f.text()));
+    push(); V.fit = true; changed(true);
+    LOS.toast(`Loaded parameters from ${f.name}.`, "good");
+  } catch (err) { LOS.toast(`Couldn't read ${f.name}: ${err.message || err}`, "bad"); }
+}
+$("ta-pfile").addEventListener("change", ev => { const f = ev.target.files && ev.target.files[0]; ev.target.value = ""; if (f) loadParams(f); });
+for (const k of ["img", "spec", "ion"]) $(`ta-tab-${k}`).addEventListener("click", () => setTab(k));
+$("ta-reset").addEventListener("click", () => { V.fit = true; drawImg(); });
+$("ta-png").addEventListener("click", () => {
+  const id = { img: "ta-img", spec: "ta-spec", ion: "ta-ion" }[UI.tab];
+  const nm = UI.tab === "img" ? `${base() || "scan"}_traces.png` : UI.tab === "spec" ? `${(R && R.stem) || base() || "spectra"}_spectra.png` : "ion_range.png";
+  LOS.saveCanvas($(id), nm);
+});
+$("ta-zip").addEventListener("click", () => {
+  if (!R || !R.results.length) return;
+  const files = [...R.results.map(r => ({ name: r.fname, data: r.text })), { name: R.params.name, data: R.params.text }];
+  LOS.save(`${R.stem}_spectra.zip`, LOS.zip(files), `Saved ${R.results.length} spectr${R.results.length === 1 ? "um" : "a"} and the parameters.`);
+});
+$("ta-toview").addEventListener("click", () => {
+  if (!R || !R.results.length || !window.TPV_API) return;
+  window.TPV_API.open(R.results.map(r => ({ name: r.fname, text: r.text })));
+  location.hash = "#tpview";
+});
+$("ta-ion-pt").addEventListener("click", ionPoint);
+$("ta-ion-scan").addEventListener("click", ionDoScan);
+LOS.watch($("ta-iwrap"), drawImg);
+LOS.watch($("ta-swrap"), drawSpec);
+LOS.watch($("ta-rwrap"), drawIon);
+
+// ---------- start: example scan with its settings ----------
+indexSettings();
+$("ta-exp").value = "Apollon2025"; fillTP("TPnormal");
+UI.exp = "Apollon2025"; UI.tp = "TPnormal";
+const ex = exampleScan();
+S = ex.st; push();
+setImage(ex.data, ex.w, ex.h, "example_scan.tif");
+fCmin.set(0, true); fCmax.set(0.12, true);
+$("ta-stem").value = "example_scan_Apollon2025_TPnormal";
+$("ta-name").textContent = "Example: synthetic scan (1400 × 1500 px, 50 µm/px). Load your own scan to replace it.";
+changed(true);
+
+// for tests / other apps
+window.TPA_API = { extract: (st, sp) => extractSpectrum(IMG, fromDict(st), sp), energyOut, ionRange, FILTERS, ipCal, readSettings: t => { const st = DEF(); const r = readSettings(t, st); return { st, ...r }; },
+  state: () => stateDict(S), json: () => pyJSON(stateDict(S)), jsonOf: d => pyJSON(stateDict(fromDict(d))), image: () => IMG, spectrumText };
+})();
+</script>
+<script>
+(() => {
+"use strict";
+const NAMES = { home: "", tp: "Thomson Parabola Simulator", bcal: "TP B-field Calibration", tpa: "TP Spectrum Analyser", tpview: "TP Spectrum Viewer", radiography: "Proton Radiography",
   intensity: "Laser Intensity", focal: "Encircled Energy", coil: "Coil Synchronisation & SWP", lens: "Thin Lens" };
 let current = null;
 function route() {
@@ -3585,6 +5304,7 @@ function route() {
 window.addEventListener("hashchange", route);
 LOS.pinch(LOS.$("wrap3d"), LOS.$("c3d"));
 LOS.pinch(LOS.$("wrapdet"), LOS.$("cdet"));
+LOS.pinch(LOS.$("ta-iwrap"), LOS.$("ta-img"));
 route();
 })();
 </script>
